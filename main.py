@@ -69,8 +69,6 @@ class EUNormType(Screen, Widget):
         # Norma P
         xp = np.linalg.norm(arr,pParsed)
         
-        mat.plot(arr)
-        mat.show()
         self.output_vector.text = str(arr) 
         self.output_x1.text = str(x1)  
         self.output_x2.text = str(x2)
@@ -80,17 +78,94 @@ class EUNormType(Screen, Widget):
 class ScreenFive(Screen): 
     pass
    
-class Producto_Vectorial (Screen):
-	pass
+class Producto_Vectorial (Screen, Widget):
+    def inputN(self):
+        #Taking values front the input to the codeb
+        x1Parsed = int(self.x1.text)
+        x2Parsed = int(self.x2.text)
+        x3Parsed = int(self.x3.text)
+        y1Parsed = int(self.y1.text)
+        y2Parsed = int(self.y2.text)
+        y3Parsed = int(self.y3.text)
+        vector_1=[x1Parsed,x2Parsed,x3Parsed]
+        vector_2=[y1Parsed,y2Parsed,y3Parsed]
+        print(vector_1)
+        sub_mat_i=([x2Parsed,x3Parsed],[y2Parsed,y3Parsed])
+        sub_mat_j=([x1Parsed,x3Parsed],[y1Parsed,y3Parsed])
+        sub_mat_k=([x1Parsed,x2Parsed],[y1Parsed,y2Parsed])
+        i=(np.linalg.det(sub_mat_i))*1
+        j=(np.linalg.det(sub_mat_j))*-1
+        k=(np.linalg.det(sub_mat_k))*1
+
+        self.output_i.text = str(i)
+        self.output_j.text = str(j)
+        self.output_k.text = str(k)  
+
 
 class Grafico_N_R2 (Screen):
+        #mat.plot(arr)
+        #mat.show()
 	pass
 
-class Producto_Interno (Screen):
-	pass
+class Producto_Interno (Screen, Widget):
+        pass
+    #def inputN(self):
+        #cantidad_vectores=3
+        #vector= np.zeros(n)
+        #arreglo_vectores = np.zeros((cantidad_vectores,n))
+        #pivote=1
+        #resultado=0
+        #for i in range(cantidad_vectores):
+        #    for j in range(n):
+	#	valor_aleatorio = random.randint(menor_valor,mayor_valor)
+	#	arreglo_vectores[i][j]=valor_aleatorio
+        #print(arreglo_vectores)
 
-class Producto_Mixto (Screen):
-	pass
+        #for j in range(n):
+        #    for i in range(cantidad_vectores):
+	#	pivote=arreglo_vectores[i][j]*pivote
+         #   resultado=pivote+resultado
+         #   print("Multiplicacion")	
+        #    print(pivote)
+        #    print("Suma")
+        #    print(resultado)
+        #    pivote=1
+        #print(resultado)
+        
+        #nParsed = int(self.n.text)
+
+class Producto_Mixto (Screen, Widget):
+        pass
+    #def inputN(self):
+        #Taking values front the input to the codeb
+        #x1=9
+        #x2=8
+        #x3=7
+        #y1=3
+        #y2=4
+        #y3=5
+        #z1=1
+        #z2=2
+        #z3=3
+        #i=0
+        #j=0
+        #k=0
+
+        #vector_1=[x1,x2,x3]
+        #vector_2=[y1,y2,y3]
+        #vector_3=[z1,z2,z3]
+
+        #sub_mat_i=([y2,y3],[z2,z3])
+        #sub_mat_j=([y1,y3],[z1,z3])
+        #sub_mat_k=([y1,y2],[z1,z2])
+
+        #i=(np.linalg.det(sub_mat_i))
+        #j=(np.linalg.det(sub_mat_j))
+        #k=(np.linalg.det(sub_mat_k))
+
+        #resultado=((x1*i)-(x2*j)+(x3+k))
+
+        #print(resultado)
 
 class Grafico_N_R3 (Screen):
 	pass
