@@ -46,28 +46,36 @@ class EUNormType(Screen, Widget):
         #Taking values front the input to the codeb
         nParsed = int(self.n.text)
         pParsed = int(self.p.text)
+        menor_valor = -500
+        mayor_valor = 500
         #Random array
-        arr = np.random.randint(low=0, high=nParsed, size=nParsed)
+        arr = np.zeros(nParsed)
+        for i in range(nParsed):
+            valor_aleatorio = random.randint(menor_valor,mayor_valor)
+            arr[i] = valor_aleatorio
         print(arr)
-        x1 = sum(arr)
-        #label_one = str(x1)
-        #print(output_one)
-        #print(x1)
-        x2 = sum(arr**2)
-        #print(x2)
-        x2 = np.sqrt(x2)
-        #print(x2)
-        x3 = np.amax(arr)
-        #print(x3)
-        x4 = sum(arr**pParsed)
-        x4 = x4**(1.0/pParsed)
-        #print(x4)
-        #change texts! 
+
+        # TIPOS DE NORMA
+        # |X|1
+        # Norma de la Suma
+        x1 = np.linalg.norm(arr,1)
+        # |X|2
+        # Norma Euclidiana 
+        x2 = np.linalg.norm(arr,2)
+        # |X|inf
+        # Norma del Maximo
+        x3 = np.linalg.norm(arr,np.inf)
+        # |X|p
+        # Norma P
+        xp = np.linalg.norm(arr,pParsed)
+        
         mat.plot(arr)
-        mat.show()   
+        mat.show()
+        self.output_vector.text = str(arr) 
         self.output_x1.text = str(x1)  
-
-
+        self.output_x2.text = str(x2)
+        self.output_x3.text = str(x3)
+        self.output_xp.text = str(xp)  
 
 class ScreenFive(Screen): 
     pass

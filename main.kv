@@ -203,7 +203,11 @@
     fullscreen: True
     n: n
     p: p
+    output_vector: _id_lbl_vector
     output_x1: _id_lbl_x1
+    output_x2: _id_lbl_x2
+    output_x3: _id_lbl_x3
+    output_xp: _id_lbl_xp
 
     canvas.before:
         Color:
@@ -221,14 +225,6 @@
             Label:
                 text: 'Tipos de Normas en R^n'
                 font_size: '48dp'
-            
-            Label:
-                id: _id_lbl_x1
-                text: "AQUI"
-                height: 40
-                size_hint_y: None
-                text_size: self.width, None
-                height: self.texture_size[1]
 
         BoxLayout:
             orientation: 'horizontal'
@@ -257,33 +253,74 @@
                     id: p
                     font_size: 60
                     height: 60
-
-            BoxLayout:
-                orientation: 'horizontal'
+        BoxLayout:
+            Label:
+                id: _id_lbl_vector
+                text: "AQUI"
+                height: 40
                 size_hint_y: None
-                Button:
-                    text: 'Calcular'
-                    on_press: root.inputN()
+                text_size: self.width, None
+                height: self.texture_size[1]
+        BoxLayout:
+            Button:
+                text: '1'
+            Label:
+                id: _id_lbl_x1
+                text: "AQUI"
+                height: 40
+                size_hint_y: None
+                text_size: self.width, None
+                height: self.texture_size[1]
 
+        BoxLayout:
+            Button:
+                text: '2'
+            Label:
+                id: _id_lbl_x2
+                text: "AQUI"
+                height: 40
+                size_hint_y: None
+                text_size: self.width, None
+                height: self.texture_size[1]
+
+        BoxLayout:
+            Button:
+                text: '3'
+            Label:
+                id: _id_lbl_x3
+                text: "AQUI"
+                height: 40
+                size_hint_y: None
+                text_size: self.width, None
+                height: self.texture_size[1]
+
+        BoxLayout:       
+            Button:
+                text: '4'  
+            Label:
+                id: _id_lbl_xp
+                text: "AQUI"
+                height: 40
+                size_hint_y: None
+                text_size: self.width, None
+                height: self.texture_size[1]   
         BoxLayout:
             size_hint_y: None
             height: '60dp'
             
             Button:
-                text: 'Espacio Euclidiano R^n'
-                group: 'accordion'
+                text: 'Volver'
                 on_press: 
                     root.manager.transition.direction = 'right' 
                     root.manager.transition.duration = 1 
                     root.manager.current = 'eu_option_window'
+            Button:
+                text: 'Calcular'
+                on_press: root.inputN()
 
             Button:
-                text: 'Espacio de funciones Continuas en [a,b]'
-                group: 'accordion'
-                on_press: 
-                    root.manager.transition.direction = 'left' 
-                    root.manager.transition.duration = 1 
-                    root.manager.current = 'ef_option_window'
+                text: 'Salir'
+                on_release:app.stop()
   
 <ScreenFive>: 
     BoxLayout: 
