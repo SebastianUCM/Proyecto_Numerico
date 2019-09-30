@@ -1,4 +1,4 @@
-<MainWindow>: 
+<Ventana_Menu>: 
     name: 'Accordion'
 
     fullscreen: True
@@ -9,34 +9,45 @@
         Rectangle:
             size: self.size
             source: 'data/background.png'
-    
+
     BoxLayout:
         orientation: 'vertical'
 
         Label:
             text: 'Espacios Normados'
-            font_size: '72dp'
+            font_size: '45dp'
 
-    BoxLayout:
-        size_hint_y: None
-        height: '60dp'
-        
-        Button:
-            text: 'Espacio Euclidiano R^n'
-            group: 'accordion'
-            on_press: 
-                root.manager.transition.direction = 'right' 
-                root.manager.transition.duration = 1 
-                root.manager.current = 'eu_option_window'
+    
+        BoxLayout:
+            anchor_x: 'center'
+            anchor_y: 'center'
+            padding: 20,20,20,20
+            spacing: 10
+            size_hint:1, 0.50
+            border: 90,90,90,90
+            orientation: 'vertical'
 
-        Button:
-            text: 'Espacio de funciones Continuas en [a,b]'
-            group: 'accordion'
-            on_press: 
-                root.manager.transition.direction = 'left' 
-                root.manager.transition.duration = 1 
-                root.manager.current = 'ef_option_window'
-   
+            Button:
+                text: 'Espacio Euclidiano R^n'
+                group: 'accordion'
+                on_press: 
+                    root.manager.transition.direction = 'left' 
+                    root.manager.transition.duration = 1 
+                    root.manager.current = 'eu_option_window'
+
+            Button:
+                text: 'Espacio de funciones Continuas en [a,b]'
+                group: 'accordion'
+                on_press: 
+                    root.manager.transition.direction = 'left' 
+                    root.manager.transition.duration = 1 
+                    root.manager.current = 'ef_option_window'
+
+            Button:
+                id: button3
+                text: "Salir"
+                on_release:app.stop()
+
 <EUOptionWindow>: 
     name: 'EU Option Window'
     fullscreen: True
@@ -63,8 +74,7 @@
                 padding: 10
                 #size_hint_y: None
 
-
-                #Left side buttons
+                #Botones Columna Izquierda
                 BoxLayout:
                     orientation: 'vertical'
                     padding: 5
@@ -72,38 +82,64 @@
                     Button:
                         text: 'Tipos de Normas en R^n'
                         on_press: 
-                            root.manager.transition.direction = 'right' 
+                            root.manager.transition.direction = 'left' 
                             root.manager.transition.duration = 1 
                             root.manager.current = 'eu_norm_type'
                         #background_color: .5,.1,.1,6
                     Button:
                         text: 'Producto Vectorial en R^3'
+                        on_press: 
+                            root.manager.transition.direction = 'left' 
+                            root.manager.transition.duration = 1 
+                            root.manager.current = 'vectorial'
                     Button:
                         text: 'Grafico Norma P en R^2'
+                        on_press: 
+                            root.manager.transition.direction = 'left' 
+                            root.manager.transition.duration = 1 
+                            root.manager.current = 'grafico_r2'
 
-                #right side buttons
+                #Botones Columna Derecha
                 BoxLayout:
                     orientation: 'vertical'
                     padding: 5
 
                     Button:
                         text: 'Producto Interno en R^n'
+                        on_press: 
+                            root.manager.transition.direction = 'left' 
+                            root.manager.transition.duration = 1 
+                            root.manager.current = 'interno'
                     Button:
                         text: 'Producto Mixto en R^3'
+                        on_press: 
+                            root.manager.transition.direction = 'left' 
+                            root.manager.transition.duration = 1 
+                            root.manager.current = 'mixto'
                     Button:
                         text: 'Grafico Norma P en R^3'
+                        on_press: 
+                            root.manager.transition.direction = 'left' 
+                            root.manager.transition.duration = 1 
+                            root.manager.current = 'grafico_r3'
 
         BoxLayout:
             size_hint_y: None
             height: '48dp'
+            spacing: 10
+            padding: 15,0,15,10
             
             Button:
                 text: 'Volver al Menu Principal'
                 group: 'accordion'
                 on_press: 
-                    root.manager.transition.direction = 'left' 
+                    root.manager.transition.direction = 'right' 
                     root.manager.transition.duration = 1 
                     root.manager.current = 'main_window'
+            Button:
+                id: button3
+                text: "Salir"
+                on_release:app.stop()
   
 <EFOptionWindow>: 
     name: 'EF Option Window'
@@ -137,14 +173,14 @@
                 on_press: 
                     root.manager.transition.direction = 'left' 
                     root.manager.transition.duration = 1 
-                    root.manager.current = 'main_window'
+                    root.manager.current = 'interno_funciones'
                 #background_color: .5,.1,.1,6
             Button:
                 text: 'Norma en espacio de funciones continuas'
                 on_press: 
                     root.manager.transition.direction = 'left' 
                     root.manager.transition.duration = 1 
-                    root.manager.current = 'main_window'
+                    root.manager.current = 'norma_funciones'
 
         BoxLayout:
             size_hint_y: None
@@ -154,9 +190,13 @@
                 text: 'Volver al Menu Principal'
                 group: 'accordion'
                 on_press: 
-                    root.manager.transition.direction = 'left' 
+                    root.manager.transition.direction = 'right' 
                     root.manager.transition.duration = 1 
                     root.manager.current = 'main_window'
+            Button:
+                id: button3
+                text: "Salir"
+                on_release:app.stop()
 
 <EUNormType>: 
     name: 'Accordion'
@@ -254,3 +294,183 @@
                 root.manager.transition.direction = 'right' 
                 root.manager.current = 'main_window' 
   
+<Producto_Vectorial>:
+    name: 'vectorial'
+    id: vectorial
+    AnchorLayout:
+        BoxLayout:
+            orientation: 'vertical'
+            Label:
+                text: 'Producto Vectorial en R3'
+            Label:
+                text: 'Esto es un Laybox'
+            Label:
+                text: 'Esto es un Laybox'
+            BoxLayout:
+                Button:
+                    id: button7
+                    text: 'Volver'
+                    on_press: 
+                        root.manager.transition.direction = 'right' 
+                        root.manager.transition.duration = 1 
+                        root.manager.current = 'eu_option_window'
+                Button:
+                    id: button11
+                    text: 'Calcular'
+                Button:
+                    id: button11
+                    text: 'Salir'
+                    on_release:app.stop()
+
+<Grafico_N_R2>:
+    name: 'grafico_r2'
+    id: grafico_r2
+    AnchorLayout:
+        BoxLayout:
+            orientation: 'vertical'
+            Label:
+                text: 'Grafico Norma P en R2'
+            Label:
+                text: 'Esto es un Laybox'
+            Label:
+                text: 'Esto es un Laybox'
+            BoxLayout:
+                Button:
+                    id: button7
+                    text: 'Volver'
+                    on_press: 
+                        root.manager.transition.direction = 'right' 
+                        root.manager.transition.duration = 1 
+                        root.manager.current = 'eu_option_window'
+                Button:
+                    id: button11
+                    text: 'Graficar'
+                Button:
+                    id: button11
+                    text: 'Salir'
+                    on_release:app.stop()
+
+<Producto_Interno>:
+    name: 'interno'
+    id: interno
+    AnchorLayout:
+        BoxLayout:
+            orientation: 'vertical'
+            Label:
+                text: 'Producto Interno en Rn'
+            Label:
+                text: 'Esto es un Laybox'
+            Label:
+                text: 'Esto es un Laybox'
+            BoxLayout:
+                Button:
+                    id: button7
+                    text: 'Volver'
+                    on_press: 
+                        root.manager.transition.direction = 'right' 
+                        root.manager.transition.duration = 1 
+                        root.manager.current = 'eu_option_window'
+                Button:
+                    id: button11
+                    text: 'Calcular'
+                Button:
+                    id: button11
+                    text: 'Salir'
+                    on_release:app.stop()
+
+<Producto_Mixto>:
+    name: 'mixto'
+    id: mixto
+    AnchorLayout:
+        BoxLayout:
+            orientation: 'vertical'
+            Label:
+                text: 'Producto Mixto en R3'
+            Label:
+                text: 'Esto es un Laybox'
+            Label:
+                text: 'Esto es un Laybox'
+            BoxLayout:
+                Button:
+                    id: button7
+                    text: 'Volver'
+                    on_press: 
+                        root.manager.transition.direction = 'right' 
+                        root.manager.transition.duration = 1 
+                        root.manager.current = 'eu_option_window'
+                Button:
+                    id: button11
+                    text: 'Calcular'
+                Button:
+                    id: button11
+                    text: 'Salir'
+                    on_release:app.stop()
+
+<Grafico_N_R3>:
+    name: 'grafico_r3'
+    id: grafico_r3
+    AnchorLayout:
+        BoxLayout:
+            orientation: 'vertical'
+            Label:
+                text: 'Grafico Norma P en R3'
+            Label:
+                text: 'Esto es un Laybox'
+            Label:
+                text: 'Esto es un Laybox'
+            BoxLayout:
+                Button:
+                    id: button7
+                    text: 'Volver'
+                    on_press: 
+                        root.manager.transition.direction = 'right' 
+                        root.manager.transition.duration = 1 
+                        root.manager.current = 'eu_option_window'
+                Button:
+                    id: button11
+                    text: 'Graficar'
+                Button:
+                    id: button11
+                    text: 'Salir'
+                    on_release:app.stop()
+
+<Producto_Interno_Funciones_Continuas>:
+    name: 'interno_funciones'
+    id: interno_funciones
+    AnchorLayout:
+        BoxLayout:
+            Button:
+                id: button7
+                text: 'Volver'
+                on_press: 
+                    root.manager.transition.direction = 'right' 
+                    root.manager.transition.duration = 1 
+                    root.manager.current = 'ef_option_window'
+            Button:
+                id: button11
+                text: 'Calcular'
+            Button:
+                id: button11
+                text: 'Salir'
+                on_release:app.stop()
+
+<Norma_Espacio_Funciones_Continuas>:
+    name: 'norma_funciones'
+    id: norma_funciones
+    AnchorLayout:
+        BoxLayout:
+            Button:
+                id: button7
+                text: 'Volver'
+                on_press: 
+                    root.manager.transition.direction = 'right' 
+                    root.manager.transition.duration = 1 
+                    root.manager.current = 'ef_option_window'
+            Button:
+                id: button11
+                text: 'Calcular'
+            Button:
+                id: button11
+                text: 'Salir'
+                on_release:app.stop()  
+

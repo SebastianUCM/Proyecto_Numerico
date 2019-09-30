@@ -30,8 +30,9 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 Builder.load_file('main.kv')
    
 # Create a class for all screens in which you can include 
-# helpful methods specific to that screen 
-class MainWindow(Screen): 
+# helpful methods specific to that screen
+
+class Ventana_Menu(Screen): 
     pass
    
 class EUOptionWindow(Screen): 
@@ -71,18 +72,48 @@ class EUNormType(Screen, Widget):
 class ScreenFive(Screen): 
     pass
    
-   
+class Producto_Vectorial (Screen):
+	pass
+
+class Grafico_N_R2 (Screen):
+	pass
+
+class Producto_Interno (Screen):
+	pass
+
+class Producto_Mixto (Screen):
+	pass
+
+class Grafico_N_R3 (Screen):
+	pass
+
+class Producto_Interno_Funciones_Continuas(Screen):
+        pass
+
+class Norma_Espacio_Funciones_Continuas(Screen):
+        pass
+
 # The ScreenManager controls moving between screens 
 screen_manager = ScreenManager() 
    
 # Add the screens to the manager ancontent_width supply a name 
 # that is used to switch screens 
-screen_manager.add_widget(MainWindow(name ="main_window")) 
+screen_manager.add_widget(Ventana_Menu(name ="main_window")) 
 screen_manager.add_widget(EUOptionWindow(name ="eu_option_window"))
 screen_manager.add_widget(EUNormType(name ="eu_norm_type")) 
 screen_manager.add_widget(EFOptionWindow(name ="ef_option_window")) 
-screen_manager.add_widget(ScreenFive(name ="screen_five")) 
-  
+screen_manager.add_widget(ScreenFive(name ="screen_five"))
+screen_manager.add_widget(Producto_Vectorial(name ="vectorial"))
+screen_manager.add_widget(Grafico_N_R2(name ="grafico_r2"))
+screen_manager.add_widget(Producto_Interno(name ="interno"))
+screen_manager.add_widget(Producto_Mixto(name ="mixto"))
+screen_manager.add_widget(Grafico_N_R3(name ="grafico_r3"))
+screen_manager.add_widget(Producto_Interno_Funciones_Continuas(name ="interno_funciones"))
+screen_manager.add_widget(Norma_Espacio_Funciones_Continuas(name ="norma_funciones"))
+
+
+
+
 # Create the App class 
 class CalculoNumericoApp(App): 
     def build(self):
