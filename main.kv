@@ -429,28 +429,55 @@
 <Producto_Interno>:
     name: 'interno'
     id: interno
+    n: n
+    output_vector_x: _id_lbl_vector_x
+    output_vector_y: _id_lbl_vector_y
+    output_resultado: _id_lbl_resultado
     AnchorLayout:
         BoxLayout:
             orientation: 'vertical'
             Label:
                 text: 'Producto Interno en Rn'
-            Label:
-                text: 'Esto es un Laybox'
-            Label:
-                text: 'Esto es un Laybox'
+            BoxLayout:
+                orientation: 'vertical'
+                BoxLayout:
+                    Label:
+                        text: 'Imagen xD'
+                    Label:
+                        text: 'N ='
+                    TextInput:
+                        id: n
+
+            BoxLayout:
+                BoxLayout:
+                    Label:
+                        text: 'Vector X ='
+                    Label:
+                        id: _id_lbl_vector_x
+                        text: "AQUI"
+                    Label:    
+                        text: 'Vector Y ='
+                    Label:
+                        id: _id_lbl_vector_y
+                        text: "AQUI"
+            BoxLayout:
+                BoxLayout:
+                    Label:
+                        text: 'Imagen xD'
+                    Label:    
+                        text: 'RESULTADO'
+                        id: _id_lbl_resultado
             BoxLayout:
                 Button:
-                    id: button7
                     text: 'Volver'
                     on_press: 
                         root.manager.transition.direction = 'right' 
                         root.manager.transition.duration = 1 
                         root.manager.current = 'eu_option_window'
                 Button:
-                    id: button11
                     text: 'Calcular'
+                    on_press: root.inputN()
                 Button:
-                    id: button11
                     text: 'Salir'
                     on_release:app.stop()
 
