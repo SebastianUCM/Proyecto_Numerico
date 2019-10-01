@@ -484,15 +484,62 @@
 <Producto_Mixto>:
     name: 'mixto'
     id: mixto
+    fullscreen: True
+    x1: x1
+    x2: x2
+    x3: x3
+    y1: y1
+    y2: y2
+    y3: y3
+    z1: z1
+    z2: z2
+    z3: z3
+
+    output_resultado: _id_lbl_resultado
+
     AnchorLayout:
         BoxLayout:
             orientation: 'vertical'
             Label:
                 text: 'Producto Mixto en R3'
-            Label:
-                text: 'Esto es un Laybox'
-            Label:
-                text: 'Esto es un Laybox'
+            BoxLayout:
+                orientation: 'vertical'
+                BoxLayout:
+                    Label:
+                        text: 'Vector X'
+                    TextInput:
+                        id: x1
+                    TextInput:
+                        id: x2
+                    TextInput:
+                        id: x3
+
+                    Label:
+                        text: 'Vector Y'
+                    TextInput:
+                        id: y1
+                    TextInput:
+                        id: y2
+                    TextInput:
+                        id: y3
+
+                    Label:
+                        text: 'Vector Z'
+                    TextInput:
+                        id: z1
+                    TextInput:
+                        id: z2
+                    TextInput:
+                        id: z3
+
+            BoxLayout:
+                BoxLayout:
+                    Label:
+                        text: 'Esto es un Laybox'
+                BoxLayout:
+                    Label:
+                        id: _id_lbl_resultado
+                        text: 'x'
             BoxLayout:
                 Button:
                     id: button7
@@ -504,6 +551,7 @@
                 Button:
                     id: button11
                     text: 'Calcular'
+                    on_press: root.inputN()
                 Button:
                     id: button11
                     text: 'Salir'

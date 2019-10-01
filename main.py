@@ -122,37 +122,23 @@ class Producto_Interno (Screen, Widget):
         self.output_resultado.text = str(resultado)
 
 class Producto_Mixto (Screen, Widget):
-        pass
-    #def inputN(self):
-        #Taking values front the input to the codeb
-        #x1=9
-        #x2=8
-        #x3=7
-        #y1=3
-        #y2=4
-        #y3=5
-        #z1=1
-        #z2=2
-        #z3=3
-        #i=0
-        #j=0
-        #k=0
+    def inputN(self):
+ 
+        x1Parsed = int(self.x1.text)
+        x2Parsed = int(self.x2.text)
+        x3Parsed = int(self.x3.text)
+        y1Parsed = int(self.y1.text)
+        y2Parsed = int(self.y2.text)
+        y3Parsed = int(self.y3.text)
+        z1Parsed = int(self.z1.text)
+        z2Parsed = int(self.z2.text)
+        z3Parsed = int(self.z3.text)
+        
+        matriz =([x1Parsed,x2Parsed,x3Parsed],[y1Parsed,y2Parsed,y3Parsed],[z1Parsed,z2Parsed,z3Parsed])
+        
+        resultado =(np.linalg.det(matriz))
 
-        #vector_1=[x1,x2,x3]
-        #vector_2=[y1,y2,y3]
-        #vector_3=[z1,z2,z3]
-
-        #sub_mat_i=([y2,y3],[z2,z3])
-        #sub_mat_j=([y1,y3],[z1,z3])
-        #sub_mat_k=([y1,y2],[z1,z2])
-
-        #i=(np.linalg.det(sub_mat_i))
-        #j=(np.linalg.det(sub_mat_j))
-        #k=(np.linalg.det(sub_mat_k))
-
-        #resultado=((x1*i)-(x2*j)+(x3+k))
-
-        #print(resultado)
+        self.output_resultado.text = str(resultado)
 
 class Grafico_N_R3 (Screen):
 	pass
@@ -163,11 +149,8 @@ class Producto_Interno_Funciones_Continuas(Screen):
 class Norma_Espacio_Funciones_Continuas(Screen):
         pass
 
-# The ScreenManager controls moving between screens 
 screen_manager = ScreenManager() 
    
-# Add the screens to the manager ancontent_width supply a name 
-# that is used to switch screens 
 screen_manager.add_widget(Ventana_Menu(name ="main_window")) 
 screen_manager.add_widget(EUOptionWindow(name ="eu_option_window"))
 screen_manager.add_widget(EUNormType(name ="eu_norm_type")) 
@@ -181,15 +164,10 @@ screen_manager.add_widget(Grafico_N_R3(name ="grafico_r3"))
 screen_manager.add_widget(Producto_Interno_Funciones_Continuas(name ="interno_funciones"))
 screen_manager.add_widget(Norma_Espacio_Funciones_Continuas(name ="norma_funciones"))
 
-
-
-
-# Create the App class 
 class CalculoNumericoApp(App): 
     def build(self):
         self.title = 'Calculo Numerico Proyecto 1, 2019' 
-        return screen_manager 
-  
-# run the app  
+        return screen_manager
+    
 sample_app = CalculoNumericoApp() 
 sample_app.run() 
