@@ -12,6 +12,9 @@ from mpl_toolkits.mplot3d import Axes3D
 from kivy.properties import StringProperty
 from kivy.uix.screenmanager import ScreenManager, Screen 
 from kivy.uix.image import Image
+from math import sin
+from kivy.garden.graph import Graph, MeshLinePlot
+from kivy.properties import NumericProperty,ReferenceListProperty,ObjectProperty
 
 kivy.require('1.9.0') 
 Builder.load_file('main.kv')
@@ -86,23 +89,18 @@ class Producto_Vectorial (Screen, Widget):
         self.output_k.text = str(k)  
 
 class Grafico_N_R2 (Screen):
-    def inputN(self):
+    pass
 
-        pParsed = int(self.p.text)
-        
-        x = np.arange(-1,1.1,0.1)
-        y = (1-(x)**pParsed)
-        plt.plot(x,y, color="red")
-        plt.axhline(0, color="black")
-        plt.axvline(0, color="black")
-        if pParsed%2 == 0:
-        	plt.plot(x,-y,color="red")
-        plt.xlabel('Eje x')
-        plt.ylabel('Eje y')
-        plt.title('Proyecto Cálculo Numérico')
-        plt.grid()
-        plt.show()
-        
+class SetGraph(Screen, Widget):
+    graph = Graph(xlabel='X', ylabel='Y', x_ticks_minor=5,
+    x_ticks_major=25, y_ticks_major=1,
+    y_grid_label=True, x_grid_label=True, padding=5,
+    x_grid=True, y_grid=True, xmin=-0, xmax=100, ymin=-1, ymax=1)
+    plot = MeshLinePlot(color=[1, 0, 0, 1])
+    plot.points = [(x, sin(x / 10.)) for x in range(0, 101)]
+    graph.add_plot(plot)
+
+
 class Producto_Interno (Screen, Widget):
     def inputN(self):
         
@@ -187,6 +185,7 @@ screen_manager.add_widget(EUNormType(name ="eu_norm_type"))
 screen_manager.add_widget(EFOptionWindow(name ="ef_option_window")) 
 screen_manager.add_widget(Producto_Vectorial(name ="vectorial"))
 screen_manager.add_widget(Grafico_N_R2(name ="grafico_r2"))
+screen_manager.add_widget(SetGraph(name ="SetGraph"))
 screen_manager.add_widget(Producto_Interno(name ="interno"))
 screen_manager.add_widget(Producto_Mixto(name ="mixto"))
 screen_manager.add_widget(Grafico_N_R3(name ="grafico_r3"))

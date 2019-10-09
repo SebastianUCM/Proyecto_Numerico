@@ -1,3 +1,5 @@
+#:import MeshLinePlot kivy.garden.graph.MeshLinePlot
+
 <Ventana_Menu>: 
     name: 'Accordion'
     fullscreen: True
@@ -393,8 +395,7 @@
 <Grafico_N_R2>:
     name: 'Accordion'
     fullscreen: True
-    output_x1: _id_lbl_x1
-    output_x2: _id_lbl_x2
+    p: p
 
     canvas.before:
         Color:
@@ -414,14 +415,28 @@
                 font_size: '48dp'
 
         BoxLayout:
+            size_hint_y: None
+            height: '60dp'
             orientation: 'horizontal'
             padding: 10
+            Label:
+                text: 'P : '
+                multiline: False
+            TextInput:
+                id: p
+                background_color : 3, 2, 0, 1
+                multiline: False
+            Label:
+                text: ''
 
+        BoxLayout:
+            size_hint_y: None
+            height: '60dp'
+        
         BoxLayout:
             Button:
                 text: '1'
             Label:
-                id: _id_lbl_x1
                 text: "AQUI"
                 height: 40
                 size_hint_y: None
@@ -432,7 +447,6 @@
             Button:
                 text: '2'  
             Label:
-                id: _id_lbl_x2
                 text: "AQUI"
                 height: 40
                 size_hint_y: None
@@ -451,12 +465,47 @@
                     root.manager.current = 'eu_option_window'
             Button:
                 text: 'Graficar'
-                on_press: root.inputN()
+                on_press: 
+                    root.manager.transition.direction = 'right' 
+                    root.manager.transition.duration = 1 
+                    root.manager.current = 'SetGraph'
 
             Button:
                 text: 'Salir'
                 on_release:app.stop()
-  
+
+
+<SetGraph>:
+    name: 'Accordion'
+    fullscreen: True
+    graph : graph
+    
+    canvas.before:
+        Color:
+            rgb: .9, .2, .5
+        Rectangle:
+            size: self.size
+            source: 'data/background.png'
+
+    Graph:
+        id: graph
+        xlabel:'X'
+        ylabel:'Y'
+        x_ticks_minor:5
+        x_tics_major:25
+        y_ticks_major:1
+        y_grid_label:True
+        x_grid_label:True
+        padding:5
+        x_grid:True
+        y_grid:True
+        xmin:-0
+        xmax:100
+        ymin:-1
+        ymax:1
+        pos: 0, root.height / 6
+        size: root.width * 2 / 3 , root.height * 18 / 24
+
 <Producto_Interno>:
     name: 'interno'
     id: interno
