@@ -360,33 +360,72 @@
                     on_release:app.stop()
 
 <Grafico_N_R2>:
-    name: 'grafico_r2'
-    id: grafico_r2
-    AnchorLayout:
-        BoxLayout:
-            orientation: 'vertical'
-            Label:
-                text: 'Grafico Norma P en R2'
-            Label:
-                text: 'Esto es un Laybox'
-            Label:
-                text: 'Esto es un Laybox'
-            BoxLayout:
-                Button:
-                    id: button7
-                    text: 'Volver'
-                    on_press: 
-                        root.manager.transition.direction = 'right' 
-                        root.manager.transition.duration = 1 
-                        root.manager.current = 'eu_option_window'
-                Button:
-                    id: button11
-                    text: 'Graficar'
-                Button:
-                    id: button11
-                    text: 'Salir'
-                    on_release:app.stop()
+    name: 'Accordion'
+    fullscreen: True
+    output_x1: _id_lbl_x1
+    output_x2: _id_lbl_x2
 
+    canvas.before:
+        Color:
+            rgb: .9, .2, .5
+        Rectangle:
+            size: self.size
+            source: 'data/background.png'
+    
+    BoxLayout:
+        orientation: 'vertical'
+        AnchorLayout:
+            anchor_y: 'bottom'
+            anchor_x: 'center'
+
+            Label:
+                text: 'Graficos en R2'
+                font_size: '48dp'
+
+        BoxLayout:
+            orientation: 'horizontal'
+            padding: 10
+
+        BoxLayout:
+            Button:
+                text: '1'
+            Label:
+                id: _id_lbl_x1
+                text: "AQUI"
+                height: 40
+                size_hint_y: None
+                text_size: self.width, None
+                height: self.texture_size[1]
+
+        BoxLayout:       
+            Button:
+                text: '2'  
+            Label:
+                id: _id_lbl_x2
+                text: "AQUI"
+                height: 40
+                size_hint_y: None
+                text_size: self.width, None
+                height: self.texture_size[1]   
+        
+        BoxLayout:
+            size_hint_y: None
+            height: '60dp'
+            
+            Button:
+                text: 'Volver'
+                on_press: 
+                    root.manager.transition.direction = 'right' 
+                    root.manager.transition.duration = 1 
+                    root.manager.current = 'eu_option_window'
+            Button:
+                text: 'Graficar'
+                on_press: root.inputN()
+
+            Button:
+                text: 'Salir'
+                on_release:app.stop()
+  
 <Producto_Interno>:
     name: 'interno'
     id: interno

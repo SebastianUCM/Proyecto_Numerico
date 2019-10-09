@@ -69,8 +69,6 @@ class EUNormType(Screen, Widget):
         # Norma P
         xp = np.linalg.norm(arr,pParsed)
         
-        mat.plot(arr)
-        mat.show()
         self.output_vector.text = str(arr) 
         self.output_x1.text = str(x1)  
         self.output_x2.text = str(x2)
