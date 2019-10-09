@@ -1,23 +1,18 @@
 <Ventana_Menu>: 
     name: 'Accordion'
-
     fullscreen: True
-
     canvas.before:
         Color:
             rgb: .2, .2, .5
         Rectangle:
             size: self.size
             source: 'data/background.png'
-
     BoxLayout:
         orientation: 'vertical'
-
         Label:
             text: 'Espacios Normados'
             font_size: '45dp'
 
-    
         BoxLayout:
             anchor_x: 'center'
             anchor_y: 'center'
@@ -29,6 +24,7 @@
 
             Button:
                 text: 'Espacio Euclidiano R^n'
+                background_color : 1, 1, 0, 5 
                 group: 'accordion'
                 on_press: 
                     root.manager.transition.direction = 'left' 
@@ -37,6 +33,7 @@
 
             Button:
                 text: 'Espacio de funciones Continuas en [a,b]'
+                background_color : 1, 1, 0, 5 
                 group: 'accordion'
                 on_press: 
                     root.manager.transition.direction = 'left' 
@@ -45,6 +42,7 @@
 
             Button:
                 id: button3
+                background_color : 1, 1, 0, 5 
                 text: "Salir"
                 on_release:app.stop()
 
@@ -80,19 +78,22 @@
                     padding: 5
 
                     Button:
+                        background_color : 2, 1, 0, 5 
                         text: 'Tipos de Normas en R^n'
                         on_press: 
                             root.manager.transition.direction = 'left' 
                             root.manager.transition.duration = 1 
                             root.manager.current = 'eu_norm_type'
-                        #background_color: .5,.1,.1,6
+                        #background_color: .2,.1,.1,6
                     Button:
+                        background_color : 2, 1, 0, 5 
                         text: 'Producto Vectorial en R^3'
                         on_press: 
                             root.manager.transition.direction = 'left' 
                             root.manager.transition.duration = 1 
                             root.manager.current = 'vectorial'
                     Button:
+                        background_color : 2, 1, 0, 5 
                         text: 'Grafico Norma P en R^2'
                         on_press: 
                             root.manager.transition.direction = 'left' 
@@ -105,18 +106,21 @@
                     padding: 5
 
                     Button:
+                        background_color : 2, 1, 0, 5 
                         text: 'Producto Interno en R^n'
                         on_press: 
                             root.manager.transition.direction = 'left' 
                             root.manager.transition.duration = 1 
                             root.manager.current = 'interno'
                     Button:
+                        background_color : 2, 1, 0, 5 
                         text: 'Producto Mixto en R^3'
                         on_press: 
                             root.manager.transition.direction = 'left' 
                             root.manager.transition.duration = 1 
                             root.manager.current = 'mixto'
                     Button:
+                        background_color : 2, 1, 0, 5 
                         text: 'Grafico Norma P en R^3'
                         on_press: 
                             root.manager.transition.direction = 'left' 
@@ -131,6 +135,7 @@
             
             Button:
                 text: 'Volver al Menu Principal'
+                background_color : 2, 1, 0, 5 
                 group: 'accordion'
                 on_press: 
                     root.manager.transition.direction = 'right' 
@@ -138,6 +143,7 @@
                     root.manager.current = 'main_window'
             Button:
                 id: button3
+                background_color : 2, 1, 0, 5 
                 text: "Salir"
                 on_release:app.stop()
   
@@ -211,115 +217,90 @@
 
     canvas.before:
         Color:
-            rgb: .9, .2, .5
+            rgb: .6, .3, .0
         Rectangle:
             size: self.size
             source: 'data/background.png'
     
     BoxLayout:
         orientation: 'vertical'
-        AnchorLayout:
-            anchor_y: 'bottom'
-            anchor_x: 'center'
-
+        BoxLayout:
             Label:
                 text: 'Tipos de Normas en R^n'
-                font_size: '48dp'
-
+                font_size: '40dp'
         BoxLayout:
             orientation: 'horizontal'
-            padding: 10
 
             BoxLayout:
                 orientation: 'horizontal'
                 size_hint_y: None
                 padding: 10
                 Label:
-                    text: 'N: '
-                    font_size: 60
+                    text: 'N : '
                 TextInput:
                     id: n
-                    font_size: 60
-                    height: 60
+                    background_color : 3, 2, 0, 1
 
             BoxLayout:
                 orientation: 'horizontal'
                 size_hint_y: None
                 padding: 10
+
                 Label:
-                    text: 'P: '
-                    font_size: 60
+                    text: 'P : '
                 TextInput:
                     id: p
-                    font_size: 60
-                    height: 60
+                    background_color : 3, 2, 0, 1
+
         BoxLayout:
+            Image:
+                source: 'Image/1.png'
+            Label:
+                text: "X = "
             Label:
                 id: _id_lbl_vector
-                text: "AQUI"
-                height: 40
-                size_hint_y: None
-                text_size: self.width, None
-                height: self.texture_size[1]
         BoxLayout:
-            Button:
-                text: '1'
+            Image:
+                source: 'Image/2.png'
             Label:
                 id: _id_lbl_x1
-                text: "AQUI"
-                height: 40
-                size_hint_y: None
-                text_size: self.width, None
-                height: self.texture_size[1]
-
         BoxLayout:
-            Button:
-                text: '2'
+            Image:
+                source: 'Image/3.png'
             Label:
                 id: _id_lbl_x2
-                text: "AQUI"
-                height: 40
-                size_hint_y: None
-                text_size: self.width, None
-                height: self.texture_size[1]
-
         BoxLayout:
-            Button:
-                text: '3'
+            Image:
+                source: 'Image/4.png'
             Label:
                 id: _id_lbl_x3
-                text: "AQUI"
-                height: 40
-                size_hint_y: None
-                text_size: self.width, None
-                height: self.texture_size[1]
-
         BoxLayout:       
-            Button:
-                text: '4'  
+            Image:
+                source: 'Image/5.png'
             Label:
                 id: _id_lbl_xp
-                text: "AQUI"
-                height: 40
-                size_hint_y: None
-                text_size: self.width, None
-                height: self.texture_size[1]   
         BoxLayout:
             size_hint_y: None
             height: '60dp'
             
             Button:
                 text: 'Volver'
+                source: 'data/background.png'
+                background_color : 3, 2, 0, 1
                 on_press: 
                     root.manager.transition.direction = 'right' 
                     root.manager.transition.duration = 1 
                     root.manager.current = 'eu_option_window'
             Button:
                 text: 'Calcular'
+                source: 'data/background.png'
+                background_color : 3, 2, 0, 1
                 on_press: root.inputN()
 
             Button:
                 text: 'Salir'
+                source: 'data/background.png'
+                background_color : 3, 2, 0, 1
                 on_release:app.stop()
   
 <ScreenFive>: 
@@ -345,11 +326,19 @@
     output_j: _id_lbl_j
     output_k: _id_lbl_k
 
+    canvas.before:
+        Color:
+            rgb: .6, .3, .0
+        Rectangle:
+            size: self.size
+            source: 'data/background.png'
+
     AnchorLayout:
         BoxLayout:
             orientation: 'vertical'
             Label:
                 text: 'Producto Vectorial en R3'
+                font_size: '40dp'
             BoxLayout:
                 orientation: 'vertical'
                 BoxLayout:
@@ -387,42 +376,68 @@
             BoxLayout:
                 Button:
                     text: 'Volver'
+                    background_color : 3, 2, 0, 1
                     on_press: 
                         root.manager.transition.direction = 'right' 
                         root.manager.transition.duration = 1 
                         root.manager.current = 'eu_option_window'
                 Button:
                     text: 'Calcular'
+                    background_color : 3, 2, 0, 1
                     on_press: root.inputN()
                 Button:
                     text: 'Salir'
+                    background_color : 3, 2, 0, 1
                     on_release:app.stop()
 
 <Grafico_N_R2>:
     name: 'grafico_r2'
     id: grafico_r2
+
+    p: p
+
+    canvas.before:
+        Color:
+            rgb: .6, .3, .0
+        Rectangle:
+            size: self.size
+            source: 'data/background.png'
+
     AnchorLayout:
         BoxLayout:
             orientation: 'vertical'
             Label:
                 text: 'Grafico Norma P en R2'
+            BoxLayout:
+                BoxLayout:
+                    Label:
+                        text: 'P: '
+                    TextInput:
+                        id: p
+            BoxLayout:
+                Label:
+                    text: 'Vector X'
+
             Label:
-                text: 'Esto es un Laybox'
-            Label:
-                text: 'Esto es un Laybox'
+                text: 'LATEX'  
+
             BoxLayout:
                 Button:
                     id: button7
                     text: 'Volver'
+                    background_color : 3, 2, 0, 1
                     on_press: 
                         root.manager.transition.direction = 'right' 
                         root.manager.transition.duration = 1 
                         root.manager.current = 'eu_option_window'
                 Button:
                     id: button11
+                    background_color : 3, 2, 0, 1
                     text: 'Graficar'
+                    on_press: root.inputN()
                 Button:
                     id: button11
+                    background_color : 3, 2, 0, 1
                     text: 'Salir'
                     on_release:app.stop()
 
@@ -433,6 +448,12 @@
     output_vector_x: _id_lbl_vector_x
     output_vector_y: _id_lbl_vector_y
     output_resultado: _id_lbl_resultado
+    canvas.before:
+        Color:
+            rgb: .6, .3, .0
+        Rectangle:
+            size: self.size
+            source: 'data/background.png'
     AnchorLayout:
         BoxLayout:
             orientation: 'vertical'
@@ -496,7 +517,12 @@
     z3: z3
 
     output_resultado: _id_lbl_resultado
-
+    canvas.before:
+        Color:
+            rgb: .6, .3, .0
+        Rectangle:
+            size: self.size
+            source: 'data/background.png'
     AnchorLayout:
         BoxLayout:
             orientation: 'vertical'
@@ -551,24 +577,44 @@
                 Button:
                     id: button11
                     text: 'Calcular'
+                    background_color : 3, 2, 0, 1
                     on_press: root.inputN()
                 Button:
                     id: button11
                     text: 'Salir'
+                    background_color : 3, 2, 0, 1
                     on_release:app.stop()
 
 <Grafico_N_R3>:
     name: 'grafico_r3'
     id: grafico_r3
+
+    p: p
+
+    canvas.before:
+        Color:
+            rgb: .6, .3, .0
+        Rectangle:
+            size: self.size
+            source: 'data/background.png'
+
     AnchorLayout:
         BoxLayout:
             orientation: 'vertical'
             Label:
                 text: 'Grafico Norma P en R3'
-            Label:
-                text: 'Esto es un Laybox'
-            Label:
-                text: 'Esto es un Laybox'
+            BoxLayout:
+                BoxLayout:
+                    Label:
+                        text: 'P: '
+                    TextInput:
+                        id: p
+                
+            BoxLayout:
+                Label:
+                    text: 'Vector X'
+            
+
             BoxLayout:
                 Button:
                     id: button7
@@ -580,6 +626,7 @@
                 Button:
                     id: button11
                     text: 'Graficar'
+                    on_press: root.inputN()
                 Button:
                     id: button11
                     text: 'Salir'
@@ -588,40 +635,84 @@
 <Producto_Interno_Funciones_Continuas>:
     name: 'interno_funciones'
     id: interno_funciones
+
+    canvas.before:
+        Color:
+            rgb: .6, .7, .0
+        Rectangle:
+            size: self.size
+            source: 'data/background.png'
+
     AnchorLayout:
         BoxLayout:
-            Button:
-                id: button7
-                text: 'Volver'
-                on_press: 
-                    root.manager.transition.direction = 'right' 
-                    root.manager.transition.duration = 1 
-                    root.manager.current = 'ef_option_window'
-            Button:
-                id: button11
-                text: 'Calcular'
-            Button:
-                id: button11
-                text: 'Salir'
-                on_release:app.stop()
+            orientation: 'vertical'
+            Label:
+                text: 'a'
+            BoxLayout:
+                BoxLayout:
+                    Label:
+                        text: 'P: '
+                
+            BoxLayout:
+                Label:
+                    text: 'Vector X'
+            
+            BoxLayout:
+                Button:
+                    id: button7
+                    text: 'Volver'
+                    on_press: 
+                        root.manager.transition.direction = 'right' 
+                        root.manager.transition.duration = 1 
+                        root.manager.current = 'ef_option_window'
+                Button:
+                    id: button11
+                    text: 'Graficar'
+                    on_press: root.inputN()
+                Button:
+                    id: button11
+                    text: 'Salir'
+                    on_release:app.stop()
 
 <Norma_Espacio_Funciones_Continuas>:
     name: 'norma_funciones'
     id: norma_funciones
+
+    canvas.before:
+        Color:
+            rgb: .6, .7, .0
+        Rectangle:
+            size: self.size
+            source: 'data/background.png'
+
     AnchorLayout:
         BoxLayout:
-            Button:
-                id: button7
-                text: 'Volver'
-                on_press: 
-                    root.manager.transition.direction = 'right' 
-                    root.manager.transition.duration = 1 
-                    root.manager.current = 'ef_option_window'
-            Button:
-                id: button11
-                text: 'Calcular'
-            Button:
-                id: button11
-                text: 'Salir'
-                on_release:app.stop()  
+            orientation: 'vertical'
+            Label:
+                text: 'b'
+            BoxLayout:
+                BoxLayout:
+                    Label:
+                        text: 'P: '
+                
+            BoxLayout:
+                Label:
+                    text: 'Vector X'
+            
+            BoxLayout:
+                Button:
+                    id: button7
+                    text: 'Volver'
+                    on_press: 
+                        root.manager.transition.direction = 'right' 
+                        root.manager.transition.duration = 1 
+                        root.manager.current = 'ef_option_window'
+                Button:
+                    id: button11
+                    text: 'Graficar'
+                    on_press: root.inputN()
+                Button:
+                    id: button11
+                    text: 'Salir'
+                    on_release:app.stop()
 

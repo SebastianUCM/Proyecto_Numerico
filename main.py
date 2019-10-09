@@ -1,17 +1,19 @@
 import kivy   
 import random
 import numpy as np  
-import matplotlib.pyplot as mat
+import matplotlib.pyplot as plt
 
 from kivy.app import App  
+from sympy import Symbol
+from sympy import integrate
+from kivy.lang import Builder  
 from kivy.uix.widget import Widget
+from mpl_toolkits.mplot3d import Axes3D
 from kivy.properties import StringProperty
+from kivy.uix.screenmanager import ScreenManager, Screen 
+from kivy.uix.image import Image
 
 kivy.require('1.9.0') 
-  
-from kivy.lang import Builder   
-from kivy.uix.screenmanager import ScreenManager, Screen 
-   
 Builder.load_file('main.kv')
 
 class Ventana_Menu(Screen): 
@@ -28,6 +30,7 @@ class EUNormType(Screen, Widget):
         
         nParsed = int(self.n.text)
         pParsed = int(self.p.text)
+        
         menor_valor = -500
         mayor_valor = 500
  
@@ -50,16 +53,12 @@ class EUNormType(Screen, Widget):
         # |X|p
         # Norma P
         xp = np.linalg.norm(arr,pParsed)
-        
         self.output_vector.text = str(arr) 
         self.output_x1.text = str(x1)  
         self.output_x2.text = str(x2)
         self.output_x3.text = str(x3)
         self.output_xp.text = str(xp)  
 
-class ScreenFive(Screen): 
-    pass
-   
 class Producto_Vectorial (Screen, Widget):
     def inputN(self):
 
@@ -85,12 +84,24 @@ class Producto_Vectorial (Screen, Widget):
         self.output_j.text = str(j)
         self.output_k.text = str(k)  
 
-
 class Grafico_N_R2 (Screen):
-        #mat.plot(arr)
-        #mat.show()
-	pass
+    def inputN(self):
 
+        pParsed = int(self.p.text)
+        
+        x = np.arange(-1,1.1,0.1)
+        y = (1-(x)**pParsed)
+        plt.plot(x,y, color="red")
+        plt.axhline(0, color="black")
+        plt.axvline(0, color="black")
+        if pParsed%2 == 0:
+        	plt.plot(x,-y,color="red")
+        plt.xlabel('Eje x')
+        plt.ylabel('Eje y')
+        plt.title('Proyecto Cálculo Numérico')
+        plt.grid()
+        plt.show()
+        
 class Producto_Interno (Screen, Widget):
     def inputN(self):
         
@@ -141,10 +152,28 @@ class Producto_Mixto (Screen, Widget):
         self.output_resultado.text = str(resultado)
 
 class Grafico_N_R3 (Screen):
-	pass
+	def inputN(self):
+
+		pParsed = int(self.p.text)
+
+		fig = plt.figure()
+		ax = fig.add_subplot(111, projection='3d')
+		x = y = np.arange(-3.0, 3.0, 0.01)
+		X, Y = np.meshgrid(x, y)
+		zs = np.array([abs(x)**pParsed + abs(y)**pParsed for x,y in zip(np.ravel(X), np.ravel(Y))])
+		Z = zs.reshape(X.shape)
+		ax.plot_surface(X, Y, Z)
+		ax.set_xlabel('Eje X')
+		ax.set_ylabel('Eje Y')
+		ax.set_zlabel('Eje Z')
+
+		plt.show()
 
 class Producto_Interno_Funciones_Continuas(Screen):
-        pass
+	def inputN(self):
+		x=Symbol('x')
+		print (integrate(x**3+x**2+1,x))
+        
 
 class Norma_Espacio_Funciones_Continuas(Screen):
         pass
@@ -155,7 +184,6 @@ screen_manager.add_widget(Ventana_Menu(name ="main_window"))
 screen_manager.add_widget(EUOptionWindow(name ="eu_option_window"))
 screen_manager.add_widget(EUNormType(name ="eu_norm_type")) 
 screen_manager.add_widget(EFOptionWindow(name ="ef_option_window")) 
-screen_manager.add_widget(ScreenFive(name ="screen_five"))
 screen_manager.add_widget(Producto_Vectorial(name ="vectorial"))
 screen_manager.add_widget(Grafico_N_R2(name ="grafico_r2"))
 screen_manager.add_widget(Producto_Interno(name ="interno"))
