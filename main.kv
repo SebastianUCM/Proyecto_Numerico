@@ -700,6 +700,11 @@
 <Producto_Interno_Funciones_Continuas>:
     name: 'interno_funciones'
     id: interno_funciones
+    id: id_f
+    id: if_g
+    id: int_a
+    id: int_b
+    id: label_resultado
 
     canvas.before:
         Color:
@@ -708,36 +713,68 @@
             size: self.size
             source: 'data/background.png'
 
-    AnchorLayout:
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            height: '48dp'
+            font_size: '24dp'
+            size_hint_y: None
+            text: 'Producto interno funciones Continuas'
         BoxLayout:
-            orientation: 'vertical'
-            Label:
-                text: 'a'
-            BoxLayout:
-                BoxLayout:
-                    Label:
-                        text: 'P: '
-                
+            orientation: 'horizontal'
+            padding: 20
+            spacing: 20
             BoxLayout:
                 Label:
-                    text: 'Vector X'
-            
+                    text: 'f(x): '
+                TextInput:
+                    id: id_f
             BoxLayout:
-                Button:
-                    id: button7
-                    text: 'Volver'
-                    on_press: 
-                        root.manager.transition.direction = 'right' 
-                        root.manager.transition.duration = 1 
-                        root.manager.current = 'ef_option_window'
-                Button:
-                    id: button11
-                    text: 'Graficar'
-                    on_press: root.inputN()
-                Button:
-                    id: button11
-                    text: 'Salir'
-                    on_release:app.stop()
+                Label:
+                    text: 'g(x): '
+                TextInput:
+                    id: id_f
+        BoxLayout:
+            orientation: 'horizontal'
+            padding: 20
+            spacing: 20
+            BoxLayout:
+                Label:
+                    text: 'intervalo a: '
+                TextInput:
+                    id: int_a
+            BoxLayout:
+                Label:
+                    text: 'intervalo b: '
+                TextInput:
+                    id: int_b
+        BoxLayout:
+            orientation: 'horizontal'
+            padding: 20
+            spacing: 20
+            BoxLayout:
+                Label:
+                    text: 'Resultado: '
+                    id: label_resultado
+
+        BoxLayout:
+            size_hint_y: None
+            height: '48dp'
+            Button:
+                id: button7
+                text: 'Volver'
+                on_press: 
+                    root.manager.transition.direction = 'right' 
+                    root.manager.transition.duration = 1 
+                    root.manager.current = 'ef_option_window'
+            Button:
+                id: button11
+                text: 'Graficar'
+                on_press: root.inputN()
+            Button:
+                id: button11
+                text: 'Salir'
+                on_release:app.stop()
 
 <Norma_Espacio_Funciones_Continuas>:
     name: 'norma_funciones'
@@ -754,7 +791,7 @@
         BoxLayout:
             orientation: 'vertical'
             Label:
-                text: 'b'
+                text: 'a'
             BoxLayout:
                 BoxLayout:
                     Label:
