@@ -89,16 +89,37 @@ class Producto_Vectorial (Screen, Widget):
         self.output_k.text = str(k)  
 
 class Grafico_N_R2 (Screen):
-    pass
+    graph = ObjectProperty(None)
+    def Create_Graph(self):
+        n = int(self.p.text)
+        if ((n%2) == 0):
+            list_b =[]
+            i = -1
+            while i < 1:
+                list_b.append(i)
+                i = i + 0.1
+            data = [(x, (abs(1-(x**n)))**(1/n)) for x in list_b]
+            data += [(x, ((abs(1-(x**n)))**(1/n)*-1)) for x in list_b]
 
-class SetGraph(Screen, Widget):
-    graph = Graph(xlabel='X', ylabel='Y', x_ticks_minor=5,
-    x_ticks_major=25, y_ticks_major=1,
-    y_grid_label=True, x_grid_label=True, padding=5,
-    x_grid=True, y_grid=True, xmin=-0, xmax=100, ymin=-1, ymax=1)
-    plot = MeshLinePlot(color=[1, 0, 0, 1])
-    plot.points = [(x, sin(x / 10.)) for x in range(0, 101)]
-    graph.add_plot(plot)
+        else:
+            list_a =[]
+            i = -4
+            while i < 1:
+                list_a.append(i)
+                i = i + 0.1
+                
+            list_b =[]
+            i = 1
+            while i < 4:
+                list_b.append(i)
+                i = i + 0.1
+                
+            data = [(x, (abs(1-(x**n)))**(1/n)) for x in list_a]
+            data += [(x, ((abs(1-(x**n)))**(1/n))*-1) for x in list_b]
+        
+        plot = MeshLinePlot(color=[1, 0, 0, 1])
+        plot.points = data
+        self.graph.add_plot(plot)
 
 
 class Producto_Interno (Screen, Widget):
@@ -185,7 +206,6 @@ screen_manager.add_widget(EUNormType(name ="eu_norm_type"))
 screen_manager.add_widget(EFOptionWindow(name ="ef_option_window")) 
 screen_manager.add_widget(Producto_Vectorial(name ="vectorial"))
 screen_manager.add_widget(Grafico_N_R2(name ="grafico_r2"))
-screen_manager.add_widget(SetGraph(name ="SetGraph"))
 screen_manager.add_widget(Producto_Interno(name ="interno"))
 screen_manager.add_widget(Producto_Mixto(name ="mixto"))
 screen_manager.add_widget(Grafico_N_R3(name ="grafico_r3"))

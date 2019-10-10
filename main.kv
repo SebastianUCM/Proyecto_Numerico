@@ -396,6 +396,8 @@
     name: 'Accordion'
     fullscreen: True
     p: p
+    graph : graph
+    text_x1: text_x1
 
     canvas.before:
         Color:
@@ -407,19 +409,20 @@
     BoxLayout:
         orientation: 'vertical'
         AnchorLayout:
-            anchor_y: 'bottom'
+            anchor_y: 'top'
             anchor_x: 'center'
-
-            Label:
-                text: 'Graficos en R2'
-                font_size: '48dp'
+        Label:
+            size_hint_y: None
+            height: '60dp'
+            text: 'Graficos en R2'
+            font_size: '48dp'
 
         BoxLayout:
             size_hint_y: None
             height: '60dp'
             orientation: 'horizontal'
-            padding: 10
             Label:
+                id: text_x1
                 text: 'P : '
                 multiline: False
             TextInput:
@@ -428,30 +431,29 @@
                 multiline: False
             Label:
                 text: ''
-
-        BoxLayout:
-            size_hint_y: None
-            height: '60dp'
         
         BoxLayout:
-            Button:
-                text: '1'
-            Label:
-                text: "AQUI"
-                height: 40
-                size_hint_y: None
-                text_size: self.width, None
-                height: self.texture_size[1]
-
-        BoxLayout:       
-            Button:
-                text: '2'  
-            Label:
-                text: "AQUI"
-                height: 40
-                size_hint_y: None
-                text_size: self.width, None
-                height: self.texture_size[1]   
+            size_hint_y: None
+            height: '400dp'
+            Graph:
+                id: graph
+                plot: MeshLinePlot
+                xlabel:'X'
+                ylabel:'Y'
+                x_ticks_minor:5
+                x_tics_major:25
+                y_ticks_major:1
+                y_grid_label:True
+                x_grid_label:True
+                padding:5
+                x_grid:True
+                y_grid:True
+                xmin:-4
+                xmax:4
+                ymin:-4
+                ymax:4
+                pos: 0, root.height / 6
+                size: root.width * 2 / 3 , root.height * 18 / 24
         
         BoxLayout:
             size_hint_y: None
@@ -468,7 +470,7 @@
                 on_press: 
                     root.manager.transition.direction = 'right' 
                     root.manager.transition.duration = 1 
-                    root.manager.current = 'SetGraph'
+                    root.Create_Graph()
 
             Button:
                 text: 'Salir'
@@ -476,9 +478,6 @@
 
 
 <SetGraph>:
-    name: 'Accordion'
-    fullscreen: True
-    graph : graph
     
     canvas.before:
         Color:
@@ -487,24 +486,6 @@
             size: self.size
             source: 'data/background.png'
 
-    Graph:
-        id: graph
-        xlabel:'X'
-        ylabel:'Y'
-        x_ticks_minor:5
-        x_tics_major:25
-        y_ticks_major:1
-        y_grid_label:True
-        x_grid_label:True
-        padding:5
-        x_grid:True
-        y_grid:True
-        xmin:-0
-        xmax:100
-        ymin:-1
-        ymax:1
-        pos: 0, root.height / 6
-        size: root.width * 2 / 3 , root.height * 18 / 24
 
 <Producto_Interno>:
     name: 'interno'
