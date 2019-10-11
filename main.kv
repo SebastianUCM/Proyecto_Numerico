@@ -448,8 +448,8 @@
                 padding:5
                 x_grid:True
                 y_grid:True
-                xmin:-4
-                xmax:4
+                xmin:-6
+                xmax:6
                 ymin:-4
                 ymax:4
                 pos: 0, root.height / 6
@@ -475,17 +475,6 @@
             Button:
                 text: 'Salir'
                 on_release:app.stop()
-
-
-<SetGraph>:
-    
-    canvas.before:
-        Color:
-            rgb: .9, .2, .5
-        Rectangle:
-            size: self.size
-            source: 'data/background.png'
-
 
 <Producto_Interno>:
     name: 'interno'
@@ -632,51 +621,89 @@
                     on_release:app.stop()
 
 <Grafico_N_R3>:
-    name: 'grafico_r3'
-    id: grafico_r3
-
+    name: 'Accordion'
+    fullscreen: True
     p: p
+    graph : graph
+    text_x1: text_x1
 
     canvas.before:
         Color:
-            rgb: .6, .3, .0
+            rgb: .9, .2, .5
         Rectangle:
             size: self.size
             source: 'data/background.png'
+    
+    BoxLayout:
+        orientation: 'vertical'
+        AnchorLayout:
+            anchor_y: 'top'
+            anchor_x: 'center'
+        Label:
+            size_hint_y: None
+            height: '60dp'
+            text: 'Graficos en R2'
+            font_size: '48dp'
 
-    AnchorLayout:
         BoxLayout:
-            orientation: 'vertical'
+            size_hint_y: None
+            height: '60dp'
+            orientation: 'horizontal'
             Label:
-                text: 'Grafico Norma P en R3'
-            BoxLayout:
-                BoxLayout:
-                    Label:
-                        text: 'P: '
-                    TextInput:
-                        id: p
-                
-            BoxLayout:
-                Label:
-                    text: 'Vector X'
+                id: text_x1
+                text: 'P : '
+                multiline: False
+            TextInput:
+                id: p
+                background_color : 3, 2, 0, 1
+                multiline: False
+            Label:
+                text: ''
+        
+        BoxLayout:
+            size_hint_y: None
+            height: '400dp'
+            Graph:
+                id: graph
+                plot: MeshLinePlot
+                xlabel:'X'
+                ylabel:'Y'
+                x_ticks_minor:5
+                x_tics_major:25
+                y_ticks_major:1
+                y_grid_label:True
+                x_grid_label:True
+                padding:5
+                x_grid:True
+                y_grid:True
+                xmin:-6
+                xmax:6
+                ymin:-4
+                ymax:4
+                pos: 0, root.height / 6
+                size: root.width * 2 / 3 , root.height * 18 / 24
+        
+        BoxLayout:
+            size_hint_y: None
+            height: '60dp'
             
+            Button:
+                text: 'Volver'
+                on_press: 
+                    root.manager.transition.direction = 'right' 
+                    root.manager.transition.duration = 1 
+                    root.manager.current = 'eu_option_window'
+            Button:
+                text: 'Graficar'
+                on_press: 
+                    root.manager.transition.direction = 'right' 
+                    root.manager.transition.duration = 1 
+                    root.Create_Graph()
 
-            BoxLayout:
-                Button:
-                    id: button7
-                    text: 'Volver'
-                    on_press: 
-                        root.manager.transition.direction = 'right' 
-                        root.manager.transition.duration = 1 
-                        root.manager.current = 'eu_option_window'
-                Button:
-                    id: button11
-                    text: 'Graficar'
-                    on_press: root.inputN()
-                Button:
-                    id: button11
-                    text: 'Salir'
-                    on_release:app.stop()
+            Button:
+                text: 'Salir'
+                on_release:app.stop()
+
 
 <Producto_Interno_Funciones_Continuas>:
     name: 'interno_funciones'

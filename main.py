@@ -90,7 +90,11 @@ class Producto_Vectorial (Screen, Widget):
 
 class Grafico_N_R2 (Screen):
     graph = ObjectProperty(None)
+    
+    
     def Create_Graph(self):
+        for plot in self.graph.plots:
+            self.graph.remove_plot(plot)
         n = int(self.p.text)
         if ((n%2) == 0):
             list_b =[]
@@ -110,7 +114,7 @@ class Grafico_N_R2 (Screen):
                 
             list_b =[]
             i = 1
-            while i < 4:
+            while i < 6:
                 list_b.append(i)
                 i = i + 0.1
                 
