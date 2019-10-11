@@ -13,6 +13,7 @@ from kivy.properties import StringProperty
 from kivy.uix.screenmanager import ScreenManager, Screen 
 from kivy.uix.image import Image
 from math import sin
+from matplotlib import cm
 from kivy.garden.graph import Graph, MeshLinePlot
 from kivy.properties import NumericProperty,ReferenceListProperty,ObjectProperty
 
@@ -91,7 +92,6 @@ class Producto_Vectorial (Screen, Widget):
 class Grafico_N_R2 (Screen):
     graph = ObjectProperty(None)
     
-    
     def Create_Graph(self):
         for plot in self.graph.plots:
             self.graph.remove_plot(plot)
@@ -124,7 +124,6 @@ class Grafico_N_R2 (Screen):
         plot = MeshLinePlot(color=[1, 0, 0, 1])
         plot.points = data
         self.graph.add_plot(plot)
-
 
 class Producto_Interno (Screen, Widget):
     def inputN(self):
@@ -176,22 +175,23 @@ class Producto_Mixto (Screen, Widget):
         self.output_resultado.text = str(resultado)
 
 class Grafico_N_R3 (Screen):
-	def inputN(self):
+    def Create_Graph(self):
+        pParsed = int(self.p.text)
 
-		pParsed = int(self.p.text)
+        fig = plt.figure()
+        ax = fig.add_subplot(111, projection='3d')
+        x = y = np.arange(-2.0, 2.0, 0.1)
+        X, Y = np.meshgrid(x, y)
+        zs = np.array([(1-(x)**pParsed - (y)**pParsed)**(1/pParsed) for x,y in zip(np.ravel(X), np.ravel(Y))])
+        Z = zs.reshape(X.shape)
+        ax.plot_surface(X, Y, Z)
+        ax.set_xlabel('Eje X')
+        ax.set_ylabel('Eje Y')
+        ax.set_zlabel('Eje Z')
 
-		fig = plt.figure()
-		ax = fig.add_subplot(111, projection='3d')
-		x = y = np.arange(-3.0, 3.0, 0.01)
-		X, Y = np.meshgrid(x, y)
-		zs = np.array([abs(x)**pParsed + abs(y)**pParsed for x,y in zip(np.ravel(X), np.ravel(Y))])
-		Z = zs.reshape(X.shape)
-		ax.plot_surface(X, Y, Z)
-		ax.set_xlabel('Eje X')
-		ax.set_ylabel('Eje Y')
-		ax.set_zlabel('Eje Z')
+        plt.show()
+        
 
-		plt.show()
 
 class Producto_Interno_Funciones_Continuas(Screen):
 	def inputN(self):

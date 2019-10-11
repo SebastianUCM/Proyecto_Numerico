@@ -624,9 +624,9 @@
     name: 'Accordion'
     fullscreen: True
     p: p
-    graph : graph
     text_x1: text_x1
-
+    box_use: box_use
+    
     canvas.before:
         Color:
             rgb: .9, .2, .5
@@ -661,27 +661,9 @@
                 text: ''
         
         BoxLayout:
+            id:box_use
             size_hint_y: None
             height: '400dp'
-            Graph:
-                id: graph
-                plot: MeshLinePlot
-                xlabel:'X'
-                ylabel:'Y'
-                x_ticks_minor:5
-                x_tics_major:25
-                y_ticks_major:1
-                y_grid_label:True
-                x_grid_label:True
-                padding:5
-                x_grid:True
-                y_grid:True
-                xmin:-6
-                xmax:6
-                ymin:-4
-                ymax:4
-                pos: 0, root.height / 6
-                size: root.width * 2 / 3 , root.height * 18 / 24
         
         BoxLayout:
             size_hint_y: None
