@@ -342,29 +342,33 @@
                 text: 'Producto Vectorial en R3'
                 font_size: '40dp'
             BoxLayout:
-                orientation: 'vertical'
                 BoxLayout:
-                    Label:
-                        text: 'Vector X'
-                    TextInput:
-                        id: x1
-                    TextInput:
-                        id: x2
-                    TextInput:
-                        id: x3
-
-                    Label:
-                        text: 'Vector Y'
-                    TextInput:
-                        id: y1
-                    TextInput:
-                        id: y2
-                    TextInput:
-                        id: y3
+                    Image:
+                        source: 'Image/3.0.png'
+                BoxLayout:
+                    orientation: 'vertical'        
+                    BoxLayout:
+                        Label:
+                            text: 'Vector X'
+                        TextInput:
+                            id: x1
+                        TextInput:
+                            id: x2
+                        TextInput:
+                            id: x3
+                    BoxLayout:
+                        Label:
+                            text: 'Vector Y'
+                        TextInput:
+                            id: y1
+                        TextInput:
+                            id: y2
+                        TextInput:
+                            id: y3
             BoxLayout:
                 BoxLayout:
-                    Label:
-                        text: 'Esto es un Laybox'
+                    Image:
+                        source: 'Image/3.1.png'
                 BoxLayout:
                     Label:
                         id: _id_lbl_i
@@ -422,6 +426,10 @@
             height: '60dp'
             orientation: 'horizontal'
             Label:
+                text: ''
+            Image:
+                source: 'Image/5.0.png'
+            Label:
                 id: text_x1
                 text: 'P : '
                 multiline: False
@@ -448,8 +456,8 @@
                 padding:5
                 x_grid:True
                 y_grid:True
-                xmin:-4
-                xmax:4
+                xmin:-6
+                xmax:6
                 ymin:-4
                 ymax:4
                 pos: 0, root.height / 6
@@ -460,12 +468,14 @@
             height: '60dp'
             
             Button:
+                background_color : 3, 2, 0, 1
                 text: 'Volver'
                 on_press: 
                     root.manager.transition.direction = 'right' 
                     root.manager.transition.duration = 1 
                     root.manager.current = 'eu_option_window'
             Button:
+                background_color : 3, 2, 0, 1
                 text: 'Graficar'
                 on_press: 
                     root.manager.transition.direction = 'right' 
@@ -473,19 +483,9 @@
                     root.Create_Graph()
 
             Button:
+                background_color : 3, 2, 0, 1
                 text: 'Salir'
                 on_release:app.stop()
-
-
-<SetGraph>:
-    
-    canvas.before:
-        Color:
-            rgb: .9, .2, .5
-        Rectangle:
-            size: self.size
-            source: 'data/background.png'
-
 
 <Producto_Interno>:
     name: 'interno'
@@ -505,15 +505,17 @@
             orientation: 'vertical'
             Label:
                 text: 'Producto Interno en Rn'
+                font_size: '40dp'
             BoxLayout:
                 orientation: 'vertical'
                 BoxLayout:
-                    Label:
-                        text: 'Imagen xD'
+                    Image:
+                        source: 'Image/2.0.png'
                     Label:
                         text: 'N ='
                     TextInput:
                         id: n
+                    BoxLayout:
 
             BoxLayout:
                 BoxLayout:
@@ -529,22 +531,25 @@
                         text: "AQUI"
             BoxLayout:
                 BoxLayout:
-                    Label:
-                        text: 'Imagen xD'
+                    Image:
+                        source: 'Image/2.1.png'
                     Label:    
                         text: 'RESULTADO'
                         id: _id_lbl_resultado
             BoxLayout:
                 Button:
+                    background_color : 3, 2, 0, 1
                     text: 'Volver'
                     on_press: 
                         root.manager.transition.direction = 'right' 
                         root.manager.transition.duration = 1 
                         root.manager.current = 'eu_option_window'
                 Button:
+                    background_color : 3, 2, 0, 1
                     text: 'Calcular'
                     on_press: root.inputN()
                 Button:
+                    background_color : 3, 2, 0, 1 
                     text: 'Salir'
                     on_release:app.stop()
 
@@ -574,40 +579,44 @@
             orientation: 'vertical'
             Label:
                 text: 'Producto Mixto en R3'
+                font_size: '40dp'
             BoxLayout:
-                orientation: 'vertical'
+                Image:
+                    source: 'Image/4.0.png'
                 BoxLayout:
-                    Label:
-                        text: 'Vector X'
-                    TextInput:
-                        id: x1
-                    TextInput:
-                        id: x2
-                    TextInput:
-                        id: x3
-
-                    Label:
-                        text: 'Vector Y'
-                    TextInput:
-                        id: y1
-                    TextInput:
-                        id: y2
-                    TextInput:
-                        id: y3
-
-                    Label:
-                        text: 'Vector Z'
-                    TextInput:
-                        id: z1
-                    TextInput:
-                        id: z2
-                    TextInput:
-                        id: z3
+                    orientation: 'vertical'
+                    BoxLayout:
+                        Label:
+                            text: 'Vector X'
+                        TextInput:
+                            id: x1
+                        TextInput:
+                            id: x2
+                        TextInput:
+                            id: x3
+                    BoxLayout:
+                        Label:
+                            text: 'Vector Y'
+                        TextInput:
+                            id: y1
+                        TextInput:
+                            id: y2
+                        TextInput:
+                            id: y3
+                    BoxLayout:
+                        Label:
+                            text: 'Vector Z'
+                        TextInput:
+                            id: z1
+                        TextInput:
+                            id: z2
+                        TextInput:
+                            id: z3
 
             BoxLayout:
                 BoxLayout:
-                    Label:
-                        text: 'Esto es un Laybox'
+                    Image:
+                        source: 'Image/4.1.png'
                 BoxLayout:
                     Label:
                         id: _id_lbl_resultado
@@ -616,6 +625,7 @@
                 Button:
                     id: button7
                     text: 'Volver'
+                    background_color : 3, 2, 0, 1
                     on_press: 
                         root.manager.transition.direction = 'right' 
                         root.manager.transition.duration = 1 
@@ -632,51 +642,78 @@
                     on_release:app.stop()
 
 <Grafico_N_R3>:
-    name: 'grafico_r3'
-    id: grafico_r3
-
+    name: 'Accordion'
+    fullscreen: True
     p: p
-
+    text_x1: text_x1
+    box_use: box_use
+    
     canvas.before:
         Color:
-            rgb: .6, .3, .0
+            rgb: .9, .2, .5
         Rectangle:
             size: self.size
             source: 'data/background.png'
+    
+    BoxLayout:
+        orientation: 'vertical'
+        AnchorLayout:
+            anchor_y: 'top'
+            anchor_x: 'center'
+        Label:
+            size_hint_y: None
+            height: '60dp'
+            text: 'Graficos en R3'
+            font_size: '48dp'
 
-    AnchorLayout:
         BoxLayout:
-            orientation: 'vertical'
+            size_hint_y: None
+            height: '60dp'
+            orientation: 'horizontal'
             Label:
-                text: 'Grafico Norma P en R3'
-            BoxLayout:
-                BoxLayout:
-                    Label:
-                        text: 'P: '
-                    TextInput:
-                        id: p
-                
-            BoxLayout:
-                Label:
-                    text: 'Vector X'
+                text: ''
+            Image:
+                source: 'Image/6.png'
+            Label:
+                id: text_x1
+                text: 'P : '
+                multiline: False
+            TextInput:
+                id: p
+                background_color : 3, 2, 0, 1
+                multiline: False
+            Label:
+                text: ''
+        
+        BoxLayout:
+            id:box_use
+            size_hint_y: None
+            height: '400dp'
+        
+        BoxLayout:
+            size_hint_y: None
+            height: '60dp'
             
+            Button:
+                text: 'Volver'
+                background_color : 3, 2, 0, 1
+                on_press: 
+                    root.manager.transition.direction = 'right' 
+                    root.manager.transition.duration = 1 
+                    root.manager.current = 'eu_option_window'
+            Button:
+                text: 'Graficar'
+                background_color : 3, 2, 0, 1
+                on_press: 
+                    root.manager.transition.direction = 'right' 
+                    root.manager.transition.duration = 1 
+                    root.Create_Graph()
 
-            BoxLayout:
-                Button:
-                    id: button7
-                    text: 'Volver'
-                    on_press: 
-                        root.manager.transition.direction = 'right' 
-                        root.manager.transition.duration = 1 
-                        root.manager.current = 'eu_option_window'
-                Button:
-                    id: button11
-                    text: 'Graficar'
-                    on_press: root.inputN()
-                Button:
-                    id: button11
-                    text: 'Salir'
-                    on_release:app.stop()
+            Button:
+                background_color : 3, 2, 0, 1
+                text: 'Salir'
+                on_release:app.stop()
+
 
 <Producto_Interno_Funciones_Continuas>:
     name: 'interno_funciones'

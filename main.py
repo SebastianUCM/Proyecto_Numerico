@@ -12,7 +12,8 @@ from mpl_toolkits.mplot3d import Axes3D
 from kivy.properties import StringProperty
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.image import Image
-from math import sin,cos
+from math import sin, cos
+from matplotlib import cm
 from kivy.garden.graph import Graph, MeshLinePlot
 from kivy.properties import NumericProperty, ReferenceListProperty, ObjectProperty
 
@@ -96,8 +97,10 @@ class Producto_Vectorial (Screen, Widget):
 
 class Grafico_N_R2 (Screen):
     graph = ObjectProperty(None)
-
+    
     def Create_Graph(self):
+        for plot in self.graph.plots:
+            self.graph.remove_plot(plot)
         n = int(self.p.text)
         if ((n % 2) == 0):
             list_b = []
@@ -117,7 +120,7 @@ class Grafico_N_R2 (Screen):
 
             list_b = []
             i = 1
-            while i < 4:
+            while i < 6:
                 list_b.append(i)
                 i = i + 0.1
 
@@ -127,7 +130,6 @@ class Grafico_N_R2 (Screen):
         plot = MeshLinePlot(color=[1, 0, 0, 1])
         plot.points = data
         self.graph.add_plot(plot)
-
 
 class Producto_Interno (Screen, Widget):
     def inputN(self):
@@ -182,16 +184,14 @@ class Producto_Mixto (Screen, Widget):
 
 
 class Grafico_N_R3 (Screen):
-    def inputN(self):
-
+    def Create_Graph(self):
         pParsed = int(self.p.text)
 
         fig = plt.figure()
         ax = fig.add_subplot(111, projection='3d')
-        x = y = np.arange(-3.0, 3.0, 0.01)
+        x = y = np.arange(-2.0, 2.0, 0.1)
         X, Y = np.meshgrid(x, y)
-        zs = np.array([abs(x)**pParsed + abs(y)**pParsed for x,
-                       y in zip(np.ravel(X), np.ravel(Y))])
+        zs = np.array([(1-(x)**pParsed - (y)**pParsed)**(1/pParsed) for x,y in zip(np.ravel(X), np.ravel(Y))])
         Z = zs.reshape(X.shape)
         ax.plot_surface(X, Y, Z)
         ax.set_xlabel('Eje X')
