@@ -681,10 +681,10 @@
 <Producto_Interno_Funciones_Continuas>:
     name: 'interno_funciones'
     id: interno_funciones
-    id: id_f
-    id: if_g
-    id: int_a
-    id: int_b
+    f: f
+    g: g
+    a: a
+    b: b
     id: label_resultado
 
     canvas.before:
@@ -709,12 +709,12 @@
                 Label:
                     text: 'f(x): '
                 TextInput:
-                    id: id_f
+                    id: f
             BoxLayout:
                 Label:
                     text: 'g(x): '
                 TextInput:
-                    id: id_f
+                    id: g
         BoxLayout:
             orientation: 'horizontal'
             padding: 20
@@ -723,12 +723,12 @@
                 Label:
                     text: 'intervalo a: '
                 TextInput:
-                    id: int_a
+                    id: a
             BoxLayout:
                 Label:
                     text: 'intervalo b: '
                 TextInput:
-                    id: int_b
+                    id: b
         BoxLayout:
             orientation: 'horizontal'
             padding: 20
@@ -750,7 +750,7 @@
                     root.manager.current = 'ef_option_window'
             Button:
                 id: button11
-                text: 'Graficar'
+                text: 'Calcular'
                 on_press: root.inputN()
             Button:
                 id: button11
