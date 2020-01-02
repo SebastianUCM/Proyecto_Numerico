@@ -37,7 +37,6 @@ class MAOptionWindow(Screen, Widget):
     def calcular(self):
         Ecuacion = self._ecuacion.text
         L = list(Ecuacion)
-        str1 = ""
         LInf = int(self._LInf_.text)
         LSup = int(self._LSup_.text)
         Nparticiones = int(self._NParticiones_.text)
@@ -55,11 +54,47 @@ class MAOptionWindow(Screen, Widget):
                     item = '**'
                 str1 += item
             return eval(str1)
-        #d = eval(str1)
+        
         def rectangulos():
             i = 0
-            a = LSup
+            a = LInf
             dx = (LSup-LInf)/Nparticiones
+            vectorx = []
+            vectordatos = []
+            while a <= LSup :
+                if a == 0:
+                    vectorx.append(a)
+                    i = i+1
+                if a == LSup:
+                    a = a+dx   
+                    i = i+1
+                else:
+                    vectorx.append(a) 
+                    i = i+1
+                    a = a+dx    
+
+            #print (len(vectorx))
+            for num in range(0,len(vectorx)):
+                aux = vectorx[num]
+                aux2 = round(f(aux), 5)
+                vectordatos.append(aux2)
+
+            #print(vectordatos)
+            aux4 = 0
+            for num in range(0,len(vectordatos)):
+                aux3 = vectordatos[num]
+                aux4 = aux4 + aux3
+                resultado = aux4
+            
+            resultado = round(resultado * dx, 5)
+            #print (resultado)
+            self._rectangulos_result.text = str(resultado)
+        
+        def trapecios():
+            i = 0
+            a = LInf
+            dx = (LSup-LInf)/(Nparticiones)
+            dx2 = (LSup-LInf)/(2*Nparticiones)
             vectorx = []
             vectordatos = []
             while a <= LSup :
@@ -67,15 +102,23 @@ class MAOptionWindow(Screen, Widget):
                     vectorx.append(a)
                     i = i+1
                 else:
-                    vectorx.append(a+dx) 
+                    vectorx.append(a) 
                     i = i+1
                     a = a+dx    
 
-            print (vectorx)
+            #print (len(vectorx))
+            
+            contador = 0
             for num in range(0,len(vectorx)):
                 aux = vectorx[num]
-                aux2 = f(aux)
+                if(contador == 0 or contador == len(vectorx)):
+                    aux2 = round(f(aux), 5)
+                else:
+                    aux = 2 * f(aux)
+                    aux2 = round(aux, 5)
+
                 vectordatos.append(aux2)
+                contador = contador + 1
 
             print(vectordatos)
             aux4 = 0
@@ -84,11 +127,15 @@ class MAOptionWindow(Screen, Widget):
                 aux4 = aux4 + aux3
                 resultado = aux4
             
-            resultado = resultado * dx
-            print (resultado)
-            self._rectangulos_result.text = str(resultado)
+            resultado = round(resultado * dx2, 5)
+            #print (resultado)
+            self._trapecios_result.text = str(resultado)
         
+        def simpson():
+            pass
+
         rectangulos()
+        trapecios()
         
 
 class EUNormType(Screen, Widget):
