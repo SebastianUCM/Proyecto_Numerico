@@ -267,12 +267,90 @@ class I_N_Rectangulos(Screen, Widget):
         
         resultado = resultado * dx
         print (resultado)
+        self.output_t.text = str(resultado)
 
 def f(x):
     resultado = (x**2)+x+6
     return resultado
     
 
+class I_N_Simpson(Screen, Widget):
+    def metodorectangulos(self):
+        nParsed = int(self.n.text)
+        aParsed = int(self.a.text)
+        bParsed = int(self.b.text)
+
+
+
+        a = aParsed
+        dx = (bParsed-aParsed)/nParsed
+        vectorpar = []
+        vectorpar2 = []
+        vectorimpar = []
+        vectorimpar2 = []
+        primero:int
+        ultimo:int
+        primero = 0
+        ultimo = 0
+        i = 0
+
+        while a <= bParsed :
+            if i%2 == 0:
+                if i == 0:
+                    primero = a
+                    i=i+1
+                    a=a+dx
+                else:
+                    vectorpar.append(a)
+                    i = i+1
+                    a = a+dx
+                    
+            else: 
+                vectorimpar.append(a) 
+                i = i+1
+                a = a+dx    
+        
+        print (vectorpar)
+        print(primero)
+        print(i)
+        print(nParsed)
+        print (ultimo)
+        print(vectorimpar)
+        primero = f(primero)
+        ultimo = f(ultimo)
+        for num in range(0,len(vectorpar)):
+            aux = vectorpar[num]
+            aux2 = g(aux)
+            vectorpar2.append(aux2)
+        for num in range(0,len(vectorimpar)):
+            aux = vectorimpar[num]
+            aux2 = g(aux)
+            vectorimpar2.append(aux2)
+
+        print(vectorimpar2)
+        print(vectorpar2)
+        print(primero)
+        print(ultimo)
+
+        aux4 = 0
+        aux5 = 0
+        aux6 = 0
+        for num in range(0,len(vectorpar2)):
+            aux3 = vectorpar2[num]
+            aux4 = aux4 + aux3
+            pares = aux4
+        for num in range(0,len(vectorimpar2)):
+            aux5 = vectorimpar2[num]
+            aux6 = aux6 + aux5
+            impares = aux6
+
+        resultado = (4*impares+2*pares+primero + ultimo) * dx/3
+        print (resultado)
+        self.output_t.text = str(resultado)
+
+def g(x):
+    resultado = (x**2)+x+6
+    return resultado
 
 
 
@@ -302,6 +380,7 @@ screen_manager.add_widget(
     Norma_Espacio_Funciones_Continuas(name="norma_funciones"))
 screen_manager.add_widget(I_N_Rectangulos(name="INRectangulos"))
 screen_manager.add_widget(I_N_ventana(name="INventanas"))
+screen_manager.add_widget(I_N_Simpson(name="INSimpson"))
 
 class CalculoNumericoApp(App):
     def build(self):
