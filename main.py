@@ -1,68 +1,73 @@
-import kivy   
+import kivy
 import random
-import numpy as np  
+import numpy as np
 import matplotlib.pyplot as plt
 
-from kivy.app import App  
+from kivy.app import App
 from sympy import Symbol
 from sympy import integrate
-from kivy.lang import Builder  
+from kivy.lang import Builder
 from kivy.uix.widget import Widget
 from mpl_toolkits.mplot3d import Axes3D
 from kivy.properties import StringProperty
-from kivy.uix.screenmanager import ScreenManager, Screen 
+from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.image import Image
-from math import sin
+from math import sin, cos
 from matplotlib import cm
 from kivy.garden.graph import Graph, MeshLinePlot
-from kivy.properties import NumericProperty,ReferenceListProperty,ObjectProperty
+from kivy.properties import NumericProperty, ReferenceListProperty, ObjectProperty
 
-kivy.require('1.9.0') 
+kivy.require('1.9.0')
 Builder.load_file('main.kv')
 
-class Ventana_Menu(Screen): 
+
+class Ventana_Menu(Screen):
     pass
-   
-class EUOptionWindow(Screen): 
+
+
+class EUOptionWindow(Screen):
     pass
-  
-class EFOptionWindow(Screen): 
+
+
+class EFOptionWindow(Screen):
     pass
-  
+
+
 class EUNormType(Screen, Widget):
     def inputN(self):
-        
+
         nParsed = int(self.n.text)
         pParsed = int(self.p.text)
-        
+
         menor_valor = -500
         mayor_valor = 500
- 
+
         arr = np.zeros(nParsed)
-        
+
         for i in range(nParsed):
-            valor_aleatorio = random.randint(menor_valor,mayor_valor)
+            valor_aleatorio = random.randint(menor_valor, mayor_valor)
             arr[i] = valor_aleatorio
 
         # TIPOS DE NORMA
         # |X|1
         # Norma de la Suma
-        x1 = np.linalg.norm(arr,1)
+        x1 = np.linalg.norm(arr, 1)
         # |X|2
-        # Norma Euclidiana 
-        x2 = np.linalg.norm(arr,2)
+        # Norma Euclidiana
+        x2 = np.linalg.norm(arr, 2)
         # |X|inf
         # Norma del Maximo
-        x3 = np.linalg.norm(arr,np.inf)
+        x3 = np.linalg.norm(arr, np.inf)
         # |X|p
         # Norma P
-        xp = np.linalg.norm(arr,pParsed)
-        
-        self.output_vector.text = str(arr) 
-        self.output_x1.text = str(x1)  
+        xp = np.linalg.norm(arr, pParsed)
+
+        self.output_vector.text = str(arr)
+        self.output_x1.text = str(x1)
         self.output_x2.text = str(x2)
         self.output_x3.text = str(x3)
-        self.output_xp.text = str(xp)  
+        self.output_xp.text = str(xp)
+
 
 class Producto_Vectorial (Screen, Widget):
     def inputN(self):
@@ -73,21 +78,22 @@ class Producto_Vectorial (Screen, Widget):
         y1Parsed = int(self.y1.text)
         y2Parsed = int(self.y2.text)
         y3Parsed = int(self.y3.text)
-        
-        vector_1=[x1Parsed,x2Parsed,x3Parsed]
-        vector_2=[y1Parsed,y2Parsed,y3Parsed]
-        
-        sub_mat_i=([x2Parsed,x3Parsed],[y2Parsed,y3Parsed])
-        sub_mat_j=([x1Parsed,x3Parsed],[y1Parsed,y3Parsed])
-        sub_mat_k=([x1Parsed,x2Parsed],[y1Parsed,y2Parsed])
-        
-        i=(np.linalg.det(sub_mat_i))*1
-        j=(np.linalg.det(sub_mat_j))*-1
-        k=(np.linalg.det(sub_mat_k))*1
+
+        vector_1 = [x1Parsed, x2Parsed, x3Parsed]
+        vector_2 = [y1Parsed, y2Parsed, y3Parsed]
+
+        sub_mat_i = ([x2Parsed, x3Parsed], [y2Parsed, y3Parsed])
+        sub_mat_j = ([x1Parsed, x3Parsed], [y1Parsed, y3Parsed])
+        sub_mat_k = ([x1Parsed, x2Parsed], [y1Parsed, y2Parsed])
+
+        i = (np.linalg.det(sub_mat_i))*1
+        j = (np.linalg.det(sub_mat_j))*-1
+        k = (np.linalg.det(sub_mat_k))*1
 
         self.output_i.text = str(i)
         self.output_j.text = str(j)
-        self.output_k.text = str(k)  
+        self.output_k.text = str(k)
+
 
 class Grafico_N_R2 (Screen):
     graph = ObjectProperty(None)
@@ -96,8 +102,8 @@ class Grafico_N_R2 (Screen):
         for plot in self.graph.plots:
             self.graph.remove_plot(plot)
         n = int(self.p.text)
-        if ((n%2) == 0):
-            list_b =[]
+        if ((n % 2) == 0):
+            list_b = []
             i = -1
             while i < 1:
                 list_b.append(i)
@@ -106,58 +112,59 @@ class Grafico_N_R2 (Screen):
             data += [(x, ((abs(1-(x**n)))**(1/n)*-1)) for x in list_b]
 
         else:
-            list_a =[]
+            list_a = []
             i = -4
             while i < 1:
                 list_a.append(i)
                 i = i + 0.1
-                
-            list_b =[]
+
+            list_b = []
             i = 1
             while i < 6:
                 list_b.append(i)
                 i = i + 0.1
-                
+
             data = [(x, (abs(1-(x**n)))**(1/n)) for x in list_a]
             data += [(x, ((abs(1-(x**n)))**(1/n))*-1) for x in list_b]
-        
+
         plot = MeshLinePlot(color=[1, 0, 0, 1])
         plot.points = data
         self.graph.add_plot(plot)
 
 class Producto_Interno (Screen, Widget):
     def inputN(self):
-        
+
         nParsed = int(self.n.text)
-        vector_x=np.zeros(nParsed)
-        vector_y=np.zeros(nParsed)
+        vector_x = np.zeros(nParsed)
+        vector_y = np.zeros(nParsed)
         menor_valor = -10
         mayor_valor = 10
-        resultado=0
-        
-        for i in range(nParsed):
-            valor_aleatorio = random.randint(menor_valor,mayor_valor)
-            vector_x[i]=valor_aleatorio
+        resultado = 0
 
         for i in range(nParsed):
-            valor_aleatorio = random.randint(menor_valor,mayor_valor)
-            vector_y[i]=valor_aleatorio
+            valor_aleatorio = random.randint(menor_valor, mayor_valor)
+            vector_x[i] = valor_aleatorio
+
+        for i in range(nParsed):
+            valor_aleatorio = random.randint(menor_valor, mayor_valor)
+            vector_y[i] = valor_aleatorio
 
         print(vector_x)
         print(vector_y)
 
         for i in range(nParsed):
-            resultado=vector_x[i]*vector_y[i]+resultado
+            resultado = vector_x[i]*vector_y[i]+resultado
             print(vector_x[i]*vector_y[i])
         print(resultado)
-        
+
         self.output_vector_x.text = str(vector_x)
         self.output_vector_y.text = str(vector_y)
         self.output_resultado.text = str(resultado)
 
+
 class Producto_Mixto (Screen, Widget):
     def inputN(self):
- 
+
         x1Parsed = int(self.x1.text)
         x2Parsed = int(self.x2.text)
         x3Parsed = int(self.x3.text)
@@ -167,12 +174,14 @@ class Producto_Mixto (Screen, Widget):
         z1Parsed = int(self.z1.text)
         z2Parsed = int(self.z2.text)
         z3Parsed = int(self.z3.text)
-        
-        matriz =([x1Parsed,x2Parsed,x3Parsed],[y1Parsed,y2Parsed,y3Parsed],[z1Parsed,z2Parsed,z3Parsed])
-        
-        resultado =(np.linalg.det(matriz))
+
+        matriz = ([x1Parsed, x2Parsed, x3Parsed], [
+                  y1Parsed, y2Parsed, y3Parsed], [z1Parsed, z2Parsed, z3Parsed])
+
+        resultado = (np.linalg.det(matriz))
 
         self.output_resultado.text = str(resultado)
+
 
 class Grafico_N_R3 (Screen):
     def Create_Graph(self):
@@ -211,36 +220,193 @@ class Grafico_N_R3 (Screen):
         """
 
         plt.show()
-        
 
 
-class Producto_Interno_Funciones_Continuas(Screen):
-	def inputN(self):
-		x=Symbol('x')
-		print (integrate(x**3+x**2+1,x))
+class Producto_Interno_Funciones_Continuas(Screen, Widget):
+    def inputN(self):
+
+        fParsed = str(self.f.text)
+        gParsed = str(self.g.text)
+        aParsed = int(self.a.text)
+        bParsed = int(self.b.text)
         
+        print(fParsed)
+        print(gParsed)
+        print(aParsed)
+        print(bParsed)
+
+        inte = int(self.fParsed)*int(self.gParsed)
+        print (inte)
+      
+
 
 class Norma_Espacio_Funciones_Continuas(Screen):
-        pass
+    pass
 
-screen_manager = ScreenManager() 
-   
-screen_manager.add_widget(Ventana_Menu(name ="main_window")) 
-screen_manager.add_widget(EUOptionWindow(name ="eu_option_window"))
-screen_manager.add_widget(EUNormType(name ="eu_norm_type")) 
-screen_manager.add_widget(EFOptionWindow(name ="ef_option_window")) 
-screen_manager.add_widget(Producto_Vectorial(name ="vectorial"))
-screen_manager.add_widget(Grafico_N_R2(name ="grafico_r2"))
-screen_manager.add_widget(Producto_Interno(name ="interno"))
-screen_manager.add_widget(Producto_Mixto(name ="mixto"))
-screen_manager.add_widget(Grafico_N_R3(name ="grafico_r3"))
-screen_manager.add_widget(Producto_Interno_Funciones_Continuas(name ="interno_funciones"))
-screen_manager.add_widget(Norma_Espacio_Funciones_Continuas(name ="norma_funciones"))
 
-class CalculoNumericoApp(App): 
-    def build(self):
-        self.title = 'Calculo Numerico Proyecto 1, 2019' 
-        return screen_manager
+
+class I_N_ventana(Screen, Widget):
+    pass
+
+
+
+class I_N_Rectangulos(Screen, Widget):
+    def metodorectangulos(self):
+        nParsed = int(self.n.text)
+        aParsed = int(self.a.text)
+        bParsed = int(self.b.text)
+
+
+
+        a = aParsed
+        dx = (bParsed-aParsed)/nParsed
+        vectorx = []
+        vectordatos = []
+        i = 0
+
+        while a <= bParsed :
+            if i == 0:
+                vectorx.append(a)
+                i = i+1
+            else:
+                vectorx.append(a+dx) 
+                i = i+1
+                a = a+dx    
+
+        print (vectorx)
+        for num in range(0,len(vectorx)):
+            aux = vectorx[num]
+            aux2 = f(aux)
+            vectordatos.append(aux2)
+
+        print(vectordatos)
+        aux4 = 0
+        for num in range(0,len(vectordatos)):
+            aux3 = vectordatos[num]
+            aux4 = aux4 + aux3
+            resultado = aux4
+        
+        resultado = resultado * dx
+        print (resultado)
+        self.output_t.text = str(resultado)
+
+def f(x):
+    resultado = (x**2)+x+6
+    return resultado
     
-sample_app = CalculoNumericoApp() 
-sample_app.run() 
+
+class I_N_Simpson(Screen, Widget):
+    def metodorectangulos(self):
+        nParsed = int(self.n.text)
+        aParsed = int(self.a.text)
+        bParsed = int(self.b.text)
+
+
+
+        a = aParsed
+        dx = (bParsed-aParsed)/nParsed
+        vectorpar = []
+        vectorpar2 = []
+        vectorimpar = []
+        vectorimpar2 = []
+        primero:int
+        ultimo:int
+        primero = 0
+        ultimo = 0
+        i = 0
+
+        while a <= bParsed :
+            if i%2 == 0:
+                if i == 0:
+                    primero = a
+                    i=i+1
+                    a=a+dx
+                else:
+                    vectorpar.append(a)
+                    i = i+1
+                    a = a+dx
+                    
+            else: 
+                vectorimpar.append(a) 
+                i = i+1
+                a = a+dx    
+        if a > bParsed :
+            ultimo = a
+        print (vectorpar)
+        print(primero)
+        print (ultimo)
+        print(vectorimpar)
+        primero = f(primero)
+        ultimo = f(ultimo)
+        for num in range(0,len(vectorpar)):
+            aux = vectorpar[num]
+            aux2 = g(aux)
+            vectorpar2.append(aux2)
+        for num in range(0,len(vectorimpar)):
+            aux = vectorimpar[num]
+            aux2 = g(aux)
+            vectorimpar2.append(aux2)
+
+        print(vectorimpar2)
+        print(vectorpar2)
+        print(primero)
+        print(ultimo)
+
+        aux4 = 0
+        aux5 = 0
+        aux6 = 0
+        for num in range(0,len(vectorpar2)):
+            aux3 = vectorpar2[num]
+            aux4 = aux4 + aux3
+            pares = aux4
+        for num in range(0,len(vectorimpar2)):
+            aux5 = vectorimpar2[num]
+            aux6 = aux6 + aux5
+            impares = aux6
+
+        resultado = (4*impares+2*pares+primero + ultimo) * dx/3
+        print (resultado)
+        self.output_t.text = str(resultado)
+
+def g(x):
+    resultado = (x**2)+x+6
+    return resultado
+
+
+
+
+
+
+
+
+
+
+
+
+screen_manager = ScreenManager()
+
+screen_manager.add_widget(Ventana_Menu(name="main_window"))
+screen_manager.add_widget(EUOptionWindow(name="eu_option_window"))
+screen_manager.add_widget(EUNormType(name="eu_norm_type"))
+screen_manager.add_widget(EFOptionWindow(name="ef_option_window"))
+screen_manager.add_widget(Producto_Vectorial(name="vectorial"))
+screen_manager.add_widget(Grafico_N_R2(name="grafico_r2"))
+screen_manager.add_widget(Producto_Interno(name="interno"))
+screen_manager.add_widget(Producto_Mixto(name="mixto"))
+screen_manager.add_widget(Grafico_N_R3(name="grafico_r3"))
+screen_manager.add_widget(
+    Producto_Interno_Funciones_Continuas(name="interno_funciones"))
+screen_manager.add_widget(
+    Norma_Espacio_Funciones_Continuas(name="norma_funciones"))
+screen_manager.add_widget(I_N_Rectangulos(name="INRectangulos"))
+screen_manager.add_widget(I_N_ventana(name="INventanas"))
+screen_manager.add_widget(I_N_Simpson(name="INSimpson"))
+
+class CalculoNumericoApp(App):
+    def build(self):
+        self.title = 'Calculo Numerico Proyecto 1, 2019'
+        return screen_manager
+
+
+sample_app = CalculoNumericoApp()
+sample_app.run()
