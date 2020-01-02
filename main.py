@@ -2,6 +2,7 @@ import kivy
 import random
 import numpy as np  
 import matplotlib.pyplot as plt
+from pylab import *
 
 from kivy.app import App  
 from sympy import Symbol
@@ -29,6 +30,36 @@ class EUOptionWindow(Screen):
 class EFOptionWindow(Screen): 
     pass
   
+class MAOptionWindow(Screen, Widget): 
+    def calcular(self):
+        Ecuacion = self._ecuacion.text
+        L = list(Ecuacion)
+        str1 = ""
+        LInf = self._LInf_.text
+        LSup = self._LSup_.text
+        Value_Input = "("
+        Value_Input += self._LSup_.text 
+        Value_Input += "-"
+        Value_Input += self._LInf_.text
+        Value_Input += ")"
+        Value_Input += "/"
+        Value_Input +=self._NParticiones_.text
+        Value = eval(Value_Input)
+        iteraciones = 0
+        N = int(self._NParticiones_.text)
+        while iteraciones < N:
+            for i, item in enumerate(L):
+                if item == "X" or item == "x":
+                    L[i] = '1'
+                    item = '1'
+                if item == "^":
+                    L[i] = '**'
+                    item = '**'
+                str1 += item
+            d = eval(str1)
+            iteraciones = iteraciones + 1
+        self._ecuacion.text = str(d)
+
 class EUNormType(Screen, Widget):
     def inputN(self):
         
@@ -229,6 +260,7 @@ screen_manager.add_widget(Ventana_Menu(name ="main_window"))
 screen_manager.add_widget(EUOptionWindow(name ="eu_option_window"))
 screen_manager.add_widget(EUNormType(name ="eu_norm_type")) 
 screen_manager.add_widget(EFOptionWindow(name ="ef_option_window")) 
+screen_manager.add_widget(MAOptionWindow(name ="ma_option_window")) 
 screen_manager.add_widget(Producto_Vectorial(name ="vectorial"))
 screen_manager.add_widget(Grafico_N_R2(name ="grafico_r2"))
 screen_manager.add_widget(Producto_Interno(name ="interno"))
