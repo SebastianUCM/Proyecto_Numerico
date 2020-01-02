@@ -309,11 +309,10 @@ class I_N_Simpson(Screen, Widget):
                 vectorimpar.append(a) 
                 i = i+1
                 a = a+dx    
-        
+        if a > bParsed :
+            ultimo = a
         print (vectorpar)
         print(primero)
-        print(i)
-        print(nParsed)
         print (ultimo)
         print(vectorimpar)
         primero = f(primero)
