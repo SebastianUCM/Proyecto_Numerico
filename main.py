@@ -239,20 +239,38 @@ class I_N_Rectangulos(Screen, Widget):
 
         a = aParsed
         dx = (bParsed-aParsed)/nParsed
-        vector = []
+        vectorx = []
+        vectordatos = []
         i = 0
 
         while a <= bParsed :
             if i == 0:
-                vector[i] = a
+                vectorx.append(a)
+                i = i+1
             else:
-                vector[i] = a+dx
+                vectorx.append(a+dx) 
                 i = i+1
                 a = a+dx    
 
-        print (vector,vector)
+        print (vectorx)
+        for num in range(0,len(vectorx)):
+            aux = vectorx[num]
+            aux2 = f(aux)
+            vectordatos.append(aux2)
 
+        print(vectordatos)
+        aux4 = 0
+        for num in range(0,len(vectordatos)):
+            aux3 = vectordatos[num]
+            aux4 = aux4 + aux3
+            resultado = aux4
+        
+        resultado = resultado * dx
+        print (resultado)
 
+def f(x):
+    resultado = (x**2)+x+6
+    return resultado
     
 
 
