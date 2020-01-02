@@ -62,9 +62,10 @@ class MAOptionWindow(Screen, Widget):
             vectorx = []
             vectordatos = []
             while a <= LSup :
-                if a == 0:
+                if a == LInf:
                     vectorx.append(a)
                     i = i+1
+                    a = a+dx  
                 if a == LSup:
                     a = a+dx   
                     i = i+1
@@ -76,7 +77,7 @@ class MAOptionWindow(Screen, Widget):
             #print (len(vectorx))
             for num in range(0,len(vectorx)):
                 aux = vectorx[num]
-                aux2 = round(f(aux), 5)
+                aux2 = f(aux)
                 vectordatos.append(aux2)
 
             #print(vectordatos)
@@ -86,48 +87,83 @@ class MAOptionWindow(Screen, Widget):
                 aux4 = aux4 + aux3
                 resultado = aux4
             
-            resultado = round(resultado * dx, 5)
+            resultado = resultado * dx
             #print (resultado)
             self._rectangulos_result.text = str(resultado)
         
-        def trapecios():
+        def rectangulosInf():
             i = 0
             a = LInf
-            dx = (LSup-LInf)/(Nparticiones)
-            dx2 = (LSup-LInf)/(2*Nparticiones)
+            dx = (LSup-LInf)/Nparticiones
             vectorx = []
             vectordatos = []
-            while a <= LSup :
-                if i == 0:
+            while a <= LSup:
+                if a == LInf:
+                    i = i+1
+                    a =round( a+dx, 2)
+                elif a == LSup:
                     vectorx.append(a)
+                    a =round( a+dx, 2)
                     i = i+1
                 else:
                     vectorx.append(a) 
                     i = i+1
-                    a = a+dx    
+                    a =round( a+dx, 2) 
 
-            #print (len(vectorx))
-            
-            contador = 0
+            print ((vectorx))
             for num in range(0,len(vectorx)):
                 aux = vectorx[num]
-                if(contador == 0 or contador == len(vectorx)):
-                    aux2 = round(f(aux), 5)
-                else:
-                    aux = 2 * f(aux)
-                    aux2 = round(aux, 5)
-
+                aux2 = f(aux)
                 vectordatos.append(aux2)
-                contador = contador + 1
 
-            print(vectordatos)
+            #print(vectordatos)
             aux4 = 0
             for num in range(0,len(vectordatos)):
                 aux3 = vectordatos[num]
                 aux4 = aux4 + aux3
                 resultado = aux4
             
-            resultado = round(resultado * dx2, 5)
+            resultado = resultado * dx
+            #print (resultado)
+            self._rectangulosInf_result.text = str(resultado)
+        
+        def trapecios():
+            a = LInf
+            dx = (LSup-LInf)/(Nparticiones)
+            dx2 = (LSup-LInf)/(2*Nparticiones)
+            round(dx, 2)
+            vectorx = []
+            vectordatos = []
+            while a <= LSup:
+                if a == LInf:
+                    vectorx.append(a)
+                    a = round(a+dx, 2)
+                else:
+                    vectorx.append(a) 
+                    a = round(a+dx, 2) 
+
+            #print ((vectorx))
+            i = 0
+            for num in vectorx:
+                aux = num
+                if (aux == LSup or i == 0):
+                    aux2 = f(aux)
+                    i = i +1
+                else:
+                    aux = 2 * f(aux)
+                    aux2 = aux
+
+                vectordatos.append(aux2)
+
+            #print(vectordatos)
+            aux4 = 0
+            for num in range(0,len(vectordatos)):
+                aux3 = vectordatos[num]
+                aux4 = aux4 + aux3
+                resultado = aux4
+            #print (resultado)
+            
+            resultado = resultado * dx2
             #print (resultado)
             self._trapecios_result.text = str(resultado)
         
@@ -135,6 +171,7 @@ class MAOptionWindow(Screen, Widget):
             pass
 
         rectangulos()
+        rectangulosInf()
         trapecios()
         
 

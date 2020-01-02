@@ -228,6 +228,7 @@
     fullscreen: True
 
     _rectangulos_result: _rectangulos_result
+    _rectangulosInf_result: _rectangulosInf_result
     _trapecios_result: _trapecios_result
     _simpson_result: _simpson_result
     _ecuacion: _ecuacion_
@@ -277,7 +278,7 @@
         
         BoxLayout:
             Label:
-                text: 'Metodo de los rectangulos ='
+                text: 'Metodo de los rectangulos Sup='
             Label:
                 id: _rectangulos_result
                 text: "AQUI"
@@ -285,7 +286,16 @@
                 text: ''
             Label:
                 text: ''
-
+        BoxLayout:
+            Label:
+                text: 'Metodo de los rectangulos Inf='
+            Label:
+                id: _rectangulosInf_result
+                text: "AQUI"
+            Label:
+                text: ''
+            Label:
+                text: ''
         BoxLayout:
             Label:
                 text: 'Metodo de los Trapecios ='
