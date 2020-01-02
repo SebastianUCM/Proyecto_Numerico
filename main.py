@@ -223,6 +223,50 @@ class Norma_Espacio_Funciones_Continuas(Screen):
     pass
 
 
+
+class I_N_ventana(Screen, Widget):
+    pass
+
+
+
+class I_N_Rectangulos(Screen, Widget):
+    def metodorectangulos(self):
+        nParsed = int(self.n.text)
+        aParsed = int(self.a.text)
+        bParsed = int(self.b.text)
+
+
+
+        a = aParsed
+        dx = (bParsed-aParsed)/nParsed
+        vector = []
+        i = 0
+
+        while a <= bParsed :
+            if i == 0:
+                vector[i] = a
+            else:
+                vector[i] = a+dx
+                i = i+1
+                a = a+dx    
+
+        print (vector,vector)
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
 screen_manager = ScreenManager()
 
 screen_manager.add_widget(Ventana_Menu(name="main_window"))
@@ -238,7 +282,8 @@ screen_manager.add_widget(
     Producto_Interno_Funciones_Continuas(name="interno_funciones"))
 screen_manager.add_widget(
     Norma_Espacio_Funciones_Continuas(name="norma_funciones"))
-
+screen_manager.add_widget(I_N_Rectangulos(name="INRectangulos"))
+screen_manager.add_widget(I_N_ventana(name="INventanas"))
 
 class CalculoNumericoApp(App):
     def build(self):

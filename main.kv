@@ -43,6 +43,14 @@
                     root.manager.current = 'ef_option_window'
 
             Button:
+                text: 'Integracion Numerica'
+                background_color : 1, 1, 0, 5 
+                group: 'accordion'
+                on_press: 
+                    root.manager.transition.direction = 'left' 
+                    root.manager.transition.duration = 1 
+                    root.manager.current = 'INventanas'
+            Button:
                 id: button3
                 background_color : 1, 1, 0, 5 
                 text: "Salir"
@@ -836,3 +844,136 @@
                     text: 'Salir'
                     on_release:app.stop()
 
+<I_N_ventana>: 
+    name: 'Accordion'
+    fullscreen: True
+    canvas.before:
+        Color:
+            rgb: .2, .2, .5
+        Rectangle:
+            size: self.size
+            source: 'data/background.png'
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            text: 'Espacios Normados'
+            font_size: '45dp'
+
+        BoxLayout:
+            anchor_x: 'center'
+            anchor_y: 'center'
+            padding: 20,20,20,20
+            spacing: 10
+            size_hint:1, 0.50
+            border: 90,90,90,90
+            orientation: 'vertical'
+
+            Button:
+                text: 'Metodo de los Rectangulos'
+                background_color : 1, 1, 0, 5 
+                group: 'accordion'
+                on_press: 
+                    root.manager.transition.direction = 'left' 
+                    root.manager.transition.duration = 1 
+                    root.manager.current = 'INRectangulos'
+
+            Button:
+                text: 'Metodos de los Trapecios'
+                background_color : 1, 1, 0, 5 
+                group: 'accordion'
+                on_press: 
+                    root.manager.transition.direction = 'left' 
+                    root.manager.transition.duration = 1 
+                    root.manager.current = ''
+
+            Button:
+                text: 'Metodo Simpson'
+                background_color : 1, 1, 0, 5 
+                group: 'accordion'
+                on_press: 
+                    root.manager.transition.direction = 'left' 
+                    root.manager.transition.duration = 1 
+                    root.manager.current = ''
+            Button:
+                id: button3
+                background_color : 1, 1, 0, 5 
+                text: "Salir"
+                on_release:app.stop()
+<I_N_Rectangulos>:
+    name: 'INRectangulos'
+    id: INRectangulos
+    n: n
+    a: a
+    b: b
+    id: label_resultado
+
+    canvas.before:
+        Color:
+            rgb: .6, .7, .0
+        Rectangle:
+            size: self.size
+            source: 'data/background.png'
+
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            height: '48dp'
+            font_size: '24dp'
+            size_hint_y: None
+            text: 'Metodo de los Rectangulos'
+
+        BoxLayout:
+            orientation: 'horizontal'
+            padding: 20
+            spacing: 20
+            BoxLayout:
+                Label:
+                    text: 'n '
+                TextInput:
+                    id: n
+        BoxLayout:
+            orientation: 'horizontal'
+            padding: 20
+            spacing: 20
+            BoxLayout:
+                Label:
+                    text: 'intervalo a: '
+                TextInput:
+                    id: a
+           
+        BoxLayout:
+            orientation: 'horizontal'
+            padding: 20
+            spacing: 20
+            BoxLayout:
+                Label:
+                    text: 'intervalo b: '
+                TextInput:
+                    id: b
+        BoxLayout:
+            orientation: 'horizontal'
+            padding: 20
+            spacing: 20
+            BoxLayout:
+                Label:
+                    text: 'Resultado: '
+                    id: label_resultado
+
+        BoxLayout:
+            size_hint_y: None
+            height: '48dp'
+            Button:
+                id: button7
+                text: 'Volver'
+                on_press: 
+                    root.manager.transition.direction = 'right' 
+                    root.manager.transition.duration = 1 
+                    root.manager.current = 'INventanas'
+            Button:
+                id: button11
+                text: 'Calcular'
+                on_press: INRectangulos.metodorectangulos()
+            Button:
+                id: button11
+                text: 'Salir'
+                on_release:app.stop()
