@@ -38,30 +38,58 @@ class MAOptionWindow(Screen, Widget):
         Ecuacion = self._ecuacion.text
         L = list(Ecuacion)
         str1 = ""
-        LInf = self._LInf_.text
-        LSup = self._LSup_.text
-        Value_Input = "("
-        Value_Input += self._LSup_.text 
-        Value_Input += "-"
-        Value_Input += self._LInf_.text
-        Value_Input += ")"
-        Value_Input += "/"
-        Value_Input +=self._NParticiones_.text
-        Value = eval(Value_Input)
-        iteraciones = 0
-        N = int(self._NParticiones_.text)
-        while iteraciones < N:
-            for i, item in enumerate(L):
-                if item == "X" or item == "x":
-                    L[i] = '1'
-                    item = '1'
+        LInf = int(self._LInf_.text)
+        LSup = int(self._LSup_.text)
+        Nparticiones = int(self._NParticiones_.text)
+
+        
+        def f(x):
+            str1 = ""
+            j = 0
+            for j, item in enumerate(L):
+                if item == "X":
+                    L[j] = x
+                    item = x
                 if item == "^":
-                    L[i] = '**'
+                    L[j] = '**'
                     item = '**'
                 str1 += item
-            d = eval(str1)
-            iteraciones = iteraciones + 1
-        self._ecuacion.text = str(d)
+            return eval(str1)
+        #d = eval(str1)
+        def rectangulos():
+            i = 0
+            a = LSup
+            dx = (LSup-LInf)/Nparticiones
+            vectorx = []
+            vectordatos = []
+            while a <= LSup :
+                if i == 0:
+                    vectorx.append(a)
+                    i = i+1
+                else:
+                    vectorx.append(a+dx) 
+                    i = i+1
+                    a = a+dx    
+
+            print (vectorx)
+            for num in range(0,len(vectorx)):
+                aux = vectorx[num]
+                aux2 = f(aux)
+                vectordatos.append(aux2)
+
+            print(vectordatos)
+            aux4 = 0
+            for num in range(0,len(vectordatos)):
+                aux3 = vectordatos[num]
+                aux4 = aux4 + aux3
+                resultado = aux4
+            
+            resultado = resultado * dx
+            print (resultado)
+            self._rectangulos_result.text = str(resultado)
+        
+        rectangulos()
+        
 
 class EUNormType(Screen, Widget):
     def inputN(self):
@@ -273,20 +301,14 @@ class Producto_Interno_Funciones_Continuas(Screen, Widget):
 class Norma_Espacio_Funciones_Continuas(Screen):
     pass
 
-
-
 class I_N_ventana(Screen, Widget):
     pass
-
-
 
 class I_N_Rectangulos(Screen, Widget):
     def metodorectangulos(self):
         nParsed = int(self.n.text)
         aParsed = int(self.a.text)
         bParsed = int(self.b.text)
-
-
 
         a = aParsed
         dx = (bParsed-aParsed)/nParsed
@@ -319,19 +341,17 @@ class I_N_Rectangulos(Screen, Widget):
         resultado = resultado * dx
         print (resultado)
         self.output_t.text = str(resultado)
-
+"""
 def f(x):
     resultado = (x**2)+x+6
     return resultado
-    
+"""   
 
 class I_N_Simpson(Screen, Widget):
     def metodorectangulos(self):
         nParsed = int(self.n.text)
         aParsed = int(self.a.text)
         bParsed = int(self.b.text)
-
-
 
         a = aParsed
         dx = (bParsed-aParsed)/nParsed
@@ -403,18 +423,9 @@ def g(x):
     return resultado
 
 
-
-
-
-
-
-
-
-
-
-
 screen_manager = ScreenManager()
 
+screen_manager.add_widget(MAOptionWindow(name ="ma_option_window")) 
 screen_manager.add_widget(Ventana_Menu(name="main_window"))
 screen_manager.add_widget(EUOptionWindow(name="eu_option_window"))
 screen_manager.add_widget(EUNormType(name="eu_norm_type"))
