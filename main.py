@@ -396,26 +396,6 @@ class Grafico_N_R3 (Screen):
 
         fig = plt.figure()
         ax = fig.add_subplot(111, projection='3d')
-
-        N=50
-        stride=2
-        u = np.linspace(0, 2 * np.pi, N)
-        v = np.linspace(0, np.pi, N)
-
-        """
-        x = np.outer(np.cos(u), np.sin(v))
-        y = np.outer(np.sin(u), np.sin(v))
-        z = np.outer(np.ones(np.size(u)), np.cos(v))   
-        """
-
-        x = np.outer(((1 - u**(pParsed) - u**(pParsed))**(1/pParsed)), ((1 - v**(pParsed) - v**(pParsed))**(1/pParsed)))
-        y = np.outer(((1 - u**(pParsed) - u**(pParsed))**(1/pParsed)), ((1 - v**(pParsed) - v**(pParsed))**(1/pParsed)))
-        z = np.outer(np.ones(np.size(u)), ((1 - v**(pParsed) - v**(pParsed))**(1/pParsed)))
-        
-        
-        ax.plot_surface(x, y, z, linewidth=0.0, cstride=stride, rstride=stride)
-
-        """
         x = y = np.arange(-2.0, 2.0, 0.1)
         X, Y = np.meshgrid(x, y)
         zs = np.array([(1-(x)**pParsed - (y)**pParsed)**(1/pParsed) for x,y in zip(np.ravel(X), np.ravel(Y))])
@@ -424,10 +404,8 @@ class Grafico_N_R3 (Screen):
         ax.set_xlabel('Eje X')
         ax.set_ylabel('Eje Y')
         ax.set_zlabel('Eje Z')
-        """
 
         plt.show()
-
 
 class Producto_Interno_Funciones_Continuas(Screen, Widget):
     def inputN(self):
@@ -445,7 +423,6 @@ class Producto_Interno_Funciones_Continuas(Screen, Widget):
         inte = int(self.fParsed)*int(self.gParsed)
         print (inte)
       
-
 
 class Norma_Espacio_Funciones_Continuas(Screen):
     pass
@@ -490,11 +467,7 @@ class I_N_Rectangulos(Screen, Widget):
         resultado = resultado * dx
         print (resultado)
         self.output_t.text = str(resultado)
-"""
-def f(x):
-    resultado = (x**2)+x+6
-    return resultado
-"""   
+ 
 
 class I_N_Simpson(Screen, Widget):
     def metodosimpson(self):
@@ -567,17 +540,14 @@ class I_N_Simpson(Screen, Widget):
         print (resultado)
         self.output_t.text = str(resultado)
 
-def g(x):
-    resultado = (x**2)+x+6
-    return resultado
 
 
 screen_manager = ScreenManager()
-
-screen_manager.add_widget(MAOptionWindow(name ="ma_option_window")) 
+ 
 screen_manager.add_widget(Ventana_Menu(name="main_window"))
 screen_manager.add_widget(EUOptionWindow(name="eu_option_window"))
 screen_manager.add_widget(EUNormType(name="eu_norm_type"))
+screen_manager.add_widget(MAOptionWindow(name ="ma_option_window"))
 screen_manager.add_widget(EFOptionWindow(name="ef_option_window"))
 screen_manager.add_widget(Producto_Vectorial(name="vectorial"))
 screen_manager.add_widget(Grafico_N_R2(name="grafico_r2"))

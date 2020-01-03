@@ -43,13 +43,14 @@
                     root.manager.current = 'ef_option_window'
 
             Button:
-                text: 'Integracion Numerica'
+                text: 'Metodos de integracion Numerica'
                 background_color : 1, 1, 0, 5 
                 group: 'accordion'
                 on_press: 
-                    root.manager.transition.direction = 'left' 
+                    root.manager.transition.direction = 'up' 
                     root.manager.transition.duration = 1 
-                    root.manager.current = 'INventanas'
+                    root.manager.current = 'ma_option_window'
+
             Button:
                 id: button3
                 background_color : 1, 1, 0, 5 
@@ -269,20 +270,20 @@
         
         BoxLayout:
             Label:
-                text: 'Metodo de los rectangulos Sup='
+                text: 'Metodo de rectangulos Sup='
             Label:
                 id: _rectangulos_result
-                text: "AQUI"
+                text: ""
             Label:
                 text: ''
             Label:
                 text: ''
         BoxLayout:
             Label:
-                text: 'Metodo de los rectangulos Inf='
+                text: 'Metodo de rectangulos Inf='
             Label:
                 id: _rectangulosInf_result
-                text: "AQUI"
+                text: ""
             Label:
                 text: ''
             Label:
@@ -292,7 +293,7 @@
                 text: 'Metodo de los Trapecios ='
             Label:
                 id: _trapecios_result
-                text: "AQUI"
+                text: ""
             Label:
                 text: ''
             Label:
@@ -303,7 +304,7 @@
                 text: 'Metodo de Simpson ='
             Label:
                 id: _simpson_result
-                text: "AQUI"
+                text: ""
             Label:
                 text: ''
             Label:
