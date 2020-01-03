@@ -216,6 +216,8 @@ class MAOptionWindow(Screen, Widget):
             aux4 = 0
             aux5 = 0
             aux6 = 0
+            impares = 0
+            pares = 0
             for num in range(0,len(vectorpar2)):
                 aux3 = vectorpar2[num]
                 aux4 = aux4 + aux3
@@ -224,7 +226,10 @@ class MAOptionWindow(Screen, Widget):
                 aux5 = vectorimpar2[num]
                 aux6 = aux6 + aux5
                 impares = aux6
-
+            print(impares)
+            print(pares)
+            print(vectorimpar2)
+            print(vectorpar2)
             resultado = (4*impares+2*pares+primero + ultimo) * dx/3
            
             self._simpson_result.text = str(resultado)
