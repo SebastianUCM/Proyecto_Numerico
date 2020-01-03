@@ -37,31 +37,143 @@ class MAOptionWindow(Screen, Widget):
     def calcular(self):
         Ecuacion = self._ecuacion.text
         L = list(Ecuacion)
-        str1 = ""
-        LInf = self._LInf_.text
-        LSup = self._LSup_.text
-        Value_Input = "("
-        Value_Input += self._LSup_.text 
-        Value_Input += "-"
-        Value_Input += self._LInf_.text
-        Value_Input += ")"
-        Value_Input += "/"
-        Value_Input +=self._NParticiones_.text
-        Value = eval(Value_Input)
-        iteraciones = 0
-        N = int(self._NParticiones_.text)
-        while iteraciones < N:
-            for i, item in enumerate(L):
-                if item == "X" or item == "x":
-                    L[i] = '1'
-                    item = '1'
+        LInf = int(self._LInf_.text)
+        LSup = int(self._LSup_.text)
+        Nparticiones = int(self._NParticiones_.text)
+
+        
+        def f(x):
+            str1 = ""
+            j = 0
+            for j, item in enumerate(L):
+                if item == "X":
+                    L[j] = x
+                    item = x
                 if item == "^":
-                    L[i] = '**'
+                    L[j] = '**'
                     item = '**'
                 str1 += item
-            d = eval(str1)
-            iteraciones = iteraciones + 1
-        self._ecuacion.text = str(d)
+            return eval(str1)
+        
+        def rectangulos():
+            i = 0
+            a = LInf
+            dx = (LSup-LInf)/Nparticiones
+            vectorx = []
+            vectordatos = []
+            while a <= LSup :
+                if a == LInf:
+                    vectorx.append(a)
+                    i = i+1
+                    a = a+dx  
+                if a == LSup:
+                    a = a+dx   
+                    i = i+1
+                else:
+                    vectorx.append(a) 
+                    i = i+1
+                    a = a+dx    
+
+            #print (len(vectorx))
+            for num in range(0,len(vectorx)):
+                aux = vectorx[num]
+                aux2 = f(aux)
+                vectordatos.append(aux2)
+
+            #print(vectordatos)
+            aux4 = 0
+            for num in range(0,len(vectordatos)):
+                aux3 = vectordatos[num]
+                aux4 = aux4 + aux3
+                resultado = aux4
+            
+            resultado = resultado * dx
+            #print (resultado)
+            self._rectangulos_result.text = str(resultado)
+        
+        def rectangulosInf():
+            i = 0
+            a = LInf
+            dx = (LSup-LInf)/Nparticiones
+            vectorx = []
+            vectordatos = []
+            while a <= LSup:
+                if a == LInf:
+                    i = i+1
+                    a =round( a+dx, 2)
+                elif a == LSup:
+                    vectorx.append(a)
+                    a =round( a+dx, 2)
+                    i = i+1
+                else:
+                    vectorx.append(a) 
+                    i = i+1
+                    a =round( a+dx, 2) 
+
+            print ((vectorx))
+            for num in range(0,len(vectorx)):
+                aux = vectorx[num]
+                aux2 = f(aux)
+                vectordatos.append(aux2)
+
+            #print(vectordatos)
+            aux4 = 0
+            for num in range(0,len(vectordatos)):
+                aux3 = vectordatos[num]
+                aux4 = aux4 + aux3
+                resultado = aux4
+            
+            resultado = resultado * dx
+            #print (resultado)
+            self._rectangulosInf_result.text = str(resultado)
+        
+        def trapecios():
+            a = LInf
+            dx = (LSup-LInf)/(Nparticiones)
+            dx2 = (LSup-LInf)/(2*Nparticiones)
+            round(dx, 2)
+            vectorx = []
+            vectordatos = []
+            while a <= LSup:
+                if a == LInf:
+                    vectorx.append(a)
+                    a = round(a+dx, 2)
+                else:
+                    vectorx.append(a) 
+                    a = round(a+dx, 2) 
+
+            #print ((vectorx))
+            i = 0
+            for num in vectorx:
+                aux = num
+                if (aux == LSup or i == 0):
+                    aux2 = f(aux)
+                    i = i +1
+                else:
+                    aux = 2 * f(aux)
+                    aux2 = aux
+
+                vectordatos.append(aux2)
+
+            #print(vectordatos)
+            aux4 = 0
+            for num in range(0,len(vectordatos)):
+                aux3 = vectordatos[num]
+                aux4 = aux4 + aux3
+                resultado = aux4
+            #print (resultado)
+            
+            resultado = resultado * dx2
+            #print (resultado)
+            self._trapecios_result.text = str(resultado)
+        
+        def simpson():
+            pass
+
+        rectangulos()
+        rectangulosInf()
+        trapecios()
+        
 
 class EUNormType(Screen, Widget):
     def inputN(self):
@@ -273,20 +385,14 @@ class Producto_Interno_Funciones_Continuas(Screen, Widget):
 class Norma_Espacio_Funciones_Continuas(Screen):
     pass
 
-
-
 class I_N_ventana(Screen, Widget):
     pass
-
-
 
 class I_N_Rectangulos(Screen, Widget):
     def metodorectangulos(self):
         nParsed = int(self.n.text)
         aParsed = int(self.a.text)
         bParsed = int(self.b.text)
-
-
 
         a = aParsed
         dx = (bParsed-aParsed)/nParsed
@@ -319,19 +425,17 @@ class I_N_Rectangulos(Screen, Widget):
         resultado = resultado * dx
         print (resultado)
         self.output_t.text = str(resultado)
-
+"""
 def f(x):
     resultado = (x**2)+x+6
     return resultado
-    
+"""   
 
 class I_N_Simpson(Screen, Widget):
     def metodorectangulos(self):
         nParsed = int(self.n.text)
         aParsed = int(self.a.text)
         bParsed = int(self.b.text)
-
-
 
         a = aParsed
         dx = (bParsed-aParsed)/nParsed
@@ -403,18 +507,9 @@ def g(x):
     return resultado
 
 
-
-
-
-
-
-
-
-
-
-
 screen_manager = ScreenManager()
 
+screen_manager.add_widget(MAOptionWindow(name ="ma_option_window")) 
 screen_manager.add_widget(Ventana_Menu(name="main_window"))
 screen_manager.add_widget(EUOptionWindow(name="eu_option_window"))
 screen_manager.add_widget(EUNormType(name="eu_norm_type"))

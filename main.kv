@@ -219,6 +219,9 @@
     fullscreen: True
 
     _rectangulos_result: _rectangulos_result
+    _rectangulosInf_result: _rectangulosInf_result
+    _trapecios_result: _trapecios_result
+    _simpson_result: _simpson_result
     _ecuacion: _ecuacion_
     _LInf_: _LInf_
     _LSup_:  _LSup_
@@ -249,8 +252,8 @@
             TextInput:
                 size_hint_x: None
                 id: _ecuacion_
-                text: "4*x^3+1"
-                width: '300dp'
+                text: "1/x"
+                width: '200dp'
             TextInput:
                 text: "Numero de particiones"
                 id: _NParticiones_
@@ -266,7 +269,7 @@
         
         BoxLayout:
             Label:
-                text: 'Metodo de los rectangulos ='
+                text: 'Metodo de los rectangulos Sup='
             Label:
                 id: _rectangulos_result
                 text: "AQUI"
@@ -274,12 +277,21 @@
                 text: ''
             Label:
                 text: ''
-
+        BoxLayout:
+            Label:
+                text: 'Metodo de los rectangulos Inf='
+            Label:
+                id: _rectangulosInf_result
+                text: "AQUI"
+            Label:
+                text: ''
+            Label:
+                text: ''
         BoxLayout:
             Label:
                 text: 'Metodo de los Trapecios ='
             Label:
-                id: _rectangulos_result
+                id: _trapecios_result
                 text: "AQUI"
             Label:
                 text: ''
@@ -290,7 +302,7 @@
             Label:
                 text: 'Metodo de Simpson ='
             Label:
-                id: _rectangulos_result
+                id: _simpson_result
                 text: "AQUI"
             Label:
                 text: ''
