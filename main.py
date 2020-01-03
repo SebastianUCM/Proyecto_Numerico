@@ -59,6 +59,7 @@ class MAOptionWindow(Screen, Widget):
             i = 0
             a = LInf
             dx = (LSup-LInf)/Nparticiones
+            resultado = 0
             vectorx = []
             vectordatos = []
             while a <= LSup :
@@ -94,6 +95,7 @@ class MAOptionWindow(Screen, Widget):
         def rectangulosInf():
             i = 0
             a = LInf
+            resultado = 0
             dx = (LSup-LInf)/Nparticiones
             vectorx = []
             vectordatos = []
@@ -129,6 +131,7 @@ class MAOptionWindow(Screen, Widget):
         
         def trapecios():
             a = LInf
+            resultado = 0
             dx = (LSup-LInf)/(Nparticiones)
             dx2 = (LSup-LInf)/(2*Nparticiones)
             round(dx, 2)
@@ -168,11 +171,68 @@ class MAOptionWindow(Screen, Widget):
             self._trapecios_result.text = str(resultado)
         
         def simpson():
-            pass
+            a = LInf
+            resultado = 0
+            dx = (LSup-LInf)/Nparticiones
+            vectorpar = []
+            vectorpar2 = []
+            vectorimpar = []
+            vectorimpar2 = []
+            primero:int
+            ultimo:int
+            primero = 0
+            ultimo = 0
+            i = 0
+
+            while a <= LSup :
+                if i%2 == 0:
+                    if i == 0:
+                        primero = a
+                        i=i+1
+                        a=a+dx
+                    else:
+                        vectorpar.append(a)
+                        i = i+1
+                        a = a+dx
+                        
+                else: 
+                    vectorimpar.append(a) 
+                    i = i+1
+                    a = a+dx    
+            if a > LSup :
+                ultimo = a
+            
+            primero = f(primero)
+            ultimo = f(ultimo)
+            for num in range(0,len(vectorpar)):
+                aux = vectorpar[num]
+                aux2 = f(aux)
+                vectorpar2.append(aux2)
+            for num in range(0,len(vectorimpar)):
+                aux = vectorimpar[num]
+                aux2 = f(aux)
+                vectorimpar2.append(aux2)
+
+            aux4 = 0
+            aux5 = 0
+            aux6 = 0
+            for num in range(0,len(vectorpar2)):
+                aux3 = vectorpar2[num]
+                aux4 = aux4 + aux3
+                pares = aux4
+            for num in range(0,len(vectorimpar2)):
+                aux5 = vectorimpar2[num]
+                aux6 = aux6 + aux5
+                impares = aux6
+
+            resultado = (4*impares+2*pares+primero + ultimo) * dx/3
+           
+            self._simpson_result.text = str(resultado)
 
         rectangulos()
         rectangulosInf()
         trapecios()
+        simpson()
         
 
 class EUNormType(Screen, Widget):
@@ -432,7 +492,7 @@ def f(x):
 """   
 
 class I_N_Simpson(Screen, Widget):
-    def metodorectangulos(self):
+    def metodosimpson(self):
         nParsed = int(self.n.text)
         aParsed = int(self.a.text)
         bParsed = int(self.b.text)
